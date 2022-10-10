@@ -16,6 +16,8 @@ const Home = () => {
   React.useEffect(() => {
     console.log(isSidebarOpen)
   }, [isSidebarOpen])
+
+
   return (
     <div>Home</div>
   )

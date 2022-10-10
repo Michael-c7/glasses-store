@@ -1,16 +1,15 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from 'react'
 import reducer from '../reducers/products_reducer'
 
-// import an action here eg: SIDEBAR_OPEN
-
 import {
-    SIDEBAR_OPEN,
-    SIDEBAR_CLOSE,
+  SIDEBAR_OPEN,
+  SIDEBAR_CLOSE,
+
 } from '../actions'
 
-
 const initialState = {
-    isSidebarOpen:false,
+  isSidebarOpen: false,
+
 }
 
 const ProductsContext = React.createContext()
@@ -24,6 +23,10 @@ export const ProductsProvider = ({ children }) => {
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE })
   }
+
+
+
+
 
 
   return (

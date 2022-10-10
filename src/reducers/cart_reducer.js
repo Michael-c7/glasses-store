@@ -1,11 +1,15 @@
-// import {
+import {
 
-// } from '../actions'
+  } from '../actions'
 
-const cart_reducer = (state, action) => {
-    if(action.type === 'test') {
-        return {...state, }
-    }
 
-    throw new Error(`no matching "${action.type}" action type`)
-}
+  const cart_reducer = (state, action) => {
+    
+    return state
+
+    throw new Error(`No Matching "${action.type}" - action type`)
+
+  }
+
+
+  export default cart_reducer
