@@ -17,11 +17,10 @@ function App() {
   const [data, setData] = React.useState(null)
 
   const fetchData = _ => {
-    let url = process.env.REACT_APP_GLASSES_DATA_URL
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => setData(data)); 
+    // fetch(url)
+    //   .then(res => res.json())
+    //   .then(data => setData(data)); 
   }
 
   React.useEffect(() => {
