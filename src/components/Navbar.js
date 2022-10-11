@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import Searchbar from './Searchbar'
 import Logo from '../assets/RETNA.svg'
+import { navItems } from '../utility/reusable'
+// icons
 import { BsBag } from 'react-icons/bs'
 import { FaBars } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import {BiSearch} from 'react-icons/bi'
+import { BiSearch } from 'react-icons/bi'
 import { MdClose } from 'react-icons/md'
-import { navItems } from '../utility/reusable'
-import Searchbar from './Searchbar'
+
+
 const Navbar = () => {
   const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(true)
 
