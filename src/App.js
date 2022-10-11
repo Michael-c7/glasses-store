@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 // pages
 import Home from './pages/Home'
@@ -35,19 +34,7 @@ function App() {
   }, [data])
 
   return (
-    <BrowserRouter>
-      <Navbar/>
-      <Sidebar/>
-      <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/products" element={ <Products/> } />
-        <Route path="/singleProduct/:productId" element={ <SingleProduct/> } />
-        <Route path="/cart" element={ <Cart/> } />
-        <Route path="/checkout" element={ <Checkout/> } />
-        <Route path="*" element={ <Error/> } />
-      </Routes>
-      <Footer/>
-    </BrowserRouter>
+    <h2>no routes</h2>
   );
 }
 
