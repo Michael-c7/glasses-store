@@ -1,13 +1,18 @@
 import {
-    SIDEBAR_OPEN,
-    SIDEBAR_CLOSE,
-  } from '../actions'
-  
-  const products_reducer = (state, action) => {
-    
-    return state
+  SIDEBAR_OPEN,
+  SIDEBAR_CLOSE,
+} from '../actions'
 
-    throw new Error(`No Matching "${action.type}" - action type`)
+const products_reducer = (state, action) => {
+  if (action.type === SIDEBAR_OPEN) {
+    return { ...state, isSidebarOpen: true }
   }
-  
-  export default products_reducer
+  if (action.type === SIDEBAR_CLOSE) {
+    return { ...state, isSidebarOpen: false }
+  }
+
+
+  throw new Error(`No Matching "${action.type}" - action type`)
+}
+
+export default products_reducer
