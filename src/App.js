@@ -15,7 +15,6 @@ import Footer from './components/Footer'
 
 
 function App() {
-  let url = process.env.REACT_APP_GLASSES_DATA_URL
 
   return (
     <BrowserRouter>
