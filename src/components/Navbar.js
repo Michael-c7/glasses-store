@@ -24,13 +24,15 @@ const Navbar = () => {
         <div className='navbar__mobile__container-1'>
           <FaBars className='navbar__icon bars-icon'/>
           <div className='navbar__searchbar-icons'>
-            {!showMobileSearchbar ? (
-              <button className='navbar__search-btn' onClick={() => setShowMobileSearchbar(true)}>
-                <BiSearch className='navbar__icon'/>
-              </button>
-            ) : (
+            {showMobileSearchbar ? (
+            // close button
               <button className='navbar__search-btn' onClick={() => setShowMobileSearchbar(false)}>
-                <MdClose className='navbar__icon'/>
+              <MdClose className='navbar__icon'/>
+            </button>
+            ) : (
+            // search button
+              <button className='navbar__search-btn' onClick={() => setShowMobileSearchbar(true)}>
+              <BiSearch className='navbar__icon'/>
               </button>
             )}
           </div>
@@ -50,7 +52,6 @@ const Navbar = () => {
               <span>95</span>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -84,10 +85,6 @@ const Wrapper = styled.nav`
     align-items:center;
     margin:0 15rem;
   }
-
-
-
-
   
 
   .navbar__mobile__container-1 {
@@ -171,7 +168,7 @@ const Wrapper = styled.nav`
 
 
 
-
+// mobile views
   @media only screen and (max-width: 1440px) {
     .navbar__container-1 {
       margin:0 5rem;
