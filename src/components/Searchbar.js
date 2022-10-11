@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {BiSearch} from 'react-icons/bi'
+import { BiSearch } from 'react-icons/bi'
 const Searchbar = () => {
   return (
     <Wrapper>
@@ -27,11 +27,11 @@ const Wrapper = styled.div`
         outline:none;
         width:100%;
         padding:0.25rem 0;
-        font-family: 'Josefin Sans', sans-serif;
+        // font-family: 'Josefin Sans', sans-serif;
     }
 
     .searchbar__search-input::placeholder {
-        font-family: 'Josefin Sans', sans-serif;
+        // font-family: 'Josefin Sans', sans-serif;
         font-size:1rem;
     }
 
