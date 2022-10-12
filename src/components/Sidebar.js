@@ -3,51 +3,47 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { navItems } from '../utility/reusable'
 import { RiCloseLine } from 'react-icons/ri'
+import { useProductsContext } from '../contexts/products_context'
 
 const Sidebar = () => {
+  const { isSidebarOpen, closeSidebar } = useProductsContext()
+
   return (
     <SidebarContainer>
-      <nav className='sidebar'>
+      <aside className={`sidebar ${isSidebarOpen ? 'sidebar--open' : 'sidebar--close'}`}>
         <header className='sidebar__header'>
-          <h2 className='sidebar__heading'>Menu</h2>
-          <button className='sidebar__close-btn'>
-            <RiCloseLine/>
-          </button>
-        </header>
-        <ul className='sidebar__items'>
-          {navItems.map((item, index) => {
-            return (
-              <li key={index} className='sidebar__item'>
-                <Link to={item.link}>{item.name}</Link>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
-      
+            <h2 className='sidebar__heading'>Menu</h2>
+            <button className='sidebar__close-btn' onClick={closeSidebar}>
+              <RiCloseLine/>
+            </button>
+          </header>
+          <ul className='sidebar__items'>
+            {navItems.map((item, index) => {
+              return (
+                <li key={index} className='sidebar__item'>
+                  <Link to={item.link}>{item.name}</Link>
+                </li>
+              )
+            })}
+          </ul>
+      </aside>
     </SidebarContainer>
   )
 }
 
 export default Sidebar
 
-const SidebarContainer = styled.section`
-// the sidebar container
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(50,50,50,0.5);
-  top:0;
-
-// the actual sidebar
+const SidebarContainer = styled.nav`
   .sidebar {
+    --sidebar-width:300px;
     position:absolute;
     background:#fff;
     height:100%;
-    width:350px;
+    width:300px;
     top:0;
-    
+    transition:transform 0.4s ease, z-index 0s;
   }
+
   
   .sidebar__header {
     display:flex;
@@ -74,5 +70,18 @@ const SidebarContainer = styled.section`
     margin:1rem 0;
     color:#000;
   }
+
+
+  .sidebar--open {
+    z-index:999;
+    transform:translateX(-0px);
+  }
+
+  .sidebar--close {
+    z-index:-999;
+    transform:translateX(-300px);
+    transition:transform 0.4s ease, z-index 2s;
+  }
+
 
 `

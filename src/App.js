@@ -12,12 +12,13 @@ import Error from './pages/Error';
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
-
+import Overlay from './components/Overlay'
 
 function App() {
 
   return (
     <BrowserRouter>
+      <Overlay/>
       <Navbar/>
       <Sidebar/>
       <Routes>

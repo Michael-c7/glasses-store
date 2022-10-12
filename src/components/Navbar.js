@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Searchbar from './Searchbar'
 import Logo from '../assets/RETNA.svg'
 import { navItems } from '../utility/reusable'
+import { useProductsContext } from '../contexts/products_context'
+
 // icons
 import { BsBag } from 'react-icons/bs'
 import { FaBars } from 'react-icons/fa'
@@ -12,8 +14,8 @@ import { MdClose } from 'react-icons/md'
 
 
 const Navbar = () => {
-  const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(true)
-
+  const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(false)
+  const { openSidebar } = useProductsContext()
   return (
     <Wrapper>
       <div className='navbar__container-1'>
@@ -22,7 +24,7 @@ const Navbar = () => {
         </div>
 
         <div className='navbar__mobile__container-1'>
-          <FaBars className='navbar__icon bars-icon'/>
+          <FaBars className='navbar__icon bars-icon' onClick={openSidebar}/>
           <div className='navbar__searchbar-icons'>
             {showMobileSearchbar ? (
             // close button

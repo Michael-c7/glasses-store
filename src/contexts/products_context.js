@@ -19,10 +19,18 @@ export const ProductsProvider = ({ children }) => {
 
   const openSidebar = () => {
     dispatch({ type: SIDEBAR_OPEN })
+    document.body.style.overflow = 'hidden'
+    
   }
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE })
+    // document.body.style.overflow = 'visible'
   }
+
+
+  React.useEffect(() => {
+    console.log()
+  })
 
 
 
