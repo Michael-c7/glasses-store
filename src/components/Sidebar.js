@@ -41,7 +41,7 @@ const SidebarContainer = styled.nav`
     height:100%;
     width:300px;
     top:0;
-    transition:transform 0.4s ease, z-index 0s;
+    transition:transform 0.45s ease, z-index 0s;
   }
 
   
@@ -80,7 +80,7 @@ const SidebarContainer = styled.nav`
   .sidebar--close {
     z-index:-999;
     transform:translateX(-300px);
-    transition:transform 0.4s ease, z-index 2s;
+    transition:transform 0.45s ease, z-index 2s;
   }
 
 

@@ -24,7 +24,7 @@ export const ProductsProvider = ({ children }) => {
   }
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE })
-    // document.body.style.overflow = 'visible'
+    document.body.style.overflow = 'visible'
   }
 
 
