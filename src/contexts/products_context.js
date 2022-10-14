@@ -27,16 +27,6 @@ export const ProductsProvider = ({ children }) => {
     document.body.style.overflow = 'visible'
   }
 
-
-  React.useEffect(() => {
-    console.log()
-  })
-
-
-
-
-
-
   return (
     <ProductsContext.Provider
       value={{

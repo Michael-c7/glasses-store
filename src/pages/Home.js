@@ -1,13 +1,13 @@
 import React from 'react'
 
-
+import ImageCarousel from '../components/ImageCarousel'
 
 const Home = () => {
 
-
-
   return (
-    <div>Home</div>
+    <div>
+      <ImageCarousel/>
+    </div>
   )
 }
 
