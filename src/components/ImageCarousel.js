@@ -5,6 +5,7 @@ import Image2 from '../assets/image_carousel_images/christina-wocintechchat-com-
 import Image3 from '../assets/image_carousel_images/AdobeStock_534825688.jpeg'
 
 import { Button1 } from '../styledComponents/Button1'
+import { Link } from 'react-router-dom'
 
 const carouselData = [
     {
@@ -27,20 +28,43 @@ const carouselData = [
   },
 ]
 
+
+
+
+
 const ImageCarousel = () => {
+  const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0)
   return (
     <Wrapper>
       <ul className='image-carousel__slides'>
         {carouselData.map((slide, index) => {
           const {image, topHeading, mainHeading, subHeading} = slide
+          /* 
+          for the last slide --> slide--prev
+          for the slide being shown --> slide--current
+          for the next slide that will be shown --> slide--next
+          */
+          let slidePosition = 'slide--next'
+          if(currentSlideIndex === index) {
+            // slide--current
+            slidePosition = 'slide--current'
+          } else if(currentSlideIndex + 1 === index) {
+            // slide--next
+            slidePosition = 'slide--next'
+          } else {
+            // slide--prev
+            slidePosition = 'slide--prev'
+          }
           return (
-            <li className='image-carousel__slide' key={index}>
+            <li className={`image-carousel__slide ${slidePosition}`} key={index}>
               <img className='image-carousel__image' src={image} alt={mainHeading}/>
               <div className='image-carousel__slide__info'>
                 <h3 className='image-carousel__slide__top-heading'>{topHeading}</h3>
                 <h2 className='image-carousel__slide__main-heading'>{mainHeading}</h2>
                 <h3 className='image-carousel__slide__sub-heading'>{subHeading}</h3>
-                <Button1>Show Now</Button1>
+                <Link to='/products'>
+                  <Button1>Show Now</Button1>
+                </Link>
               </div>
             </li>
           )
@@ -51,7 +75,7 @@ const ImageCarousel = () => {
         <ul className='image-carousel__dots'>
           {carouselData.map((_, index) => {
             return (
-              <li className='image-carousel__dot' key={index}></li>
+              <li className={`image-carousel__dot ${currentSlideIndex === index ? 'dot--current' : ''}`} key={index} onClick={() => setCurrentSlideIndex(index)}></li>
             )
           })}
         </ul>
@@ -66,7 +90,7 @@ export default ImageCarousel
 const Wrapper = styled.div`
   position:relative;
   height:700px;
-
+  overflow:hidden;
 
 .image-carousel__slides {
   position:relative;
@@ -76,12 +100,34 @@ const Wrapper = styled.div`
   position:absolute;
   width:100%;
   height:700px;
+  transform:translate(0%);
+  transition:transform 1.6s ease;
+  z-index:-1;
+}
+
+
+
+.slide--prev {
+  // the slide is behind the current slide, transform -100%
+  transform:translate(-100%);
+}
+
+.slide--current {
+  transform:translate(0%);
+  z-index:1;
+}
+
+.slide--next {
+  transform:translate(100%);
+
+
 }
 
 .image-carousel__image {
   width:100%;
   height:100%;
   object-fit:cover;
+  oject-position:bottom bottom;
 }
 
 
@@ -113,6 +159,7 @@ const Wrapper = styled.div`
   left:50%;
   top:98%;
   transform:translate(-50%, -98%);
+  z-index:10;
 }
 
 .image-carousel__dots {
@@ -132,13 +179,15 @@ const Wrapper = styled.div`
   border:2px solid #fff;
 }
 
-.image-carousel__dot:hover {
+.image-carousel__dot:hover,
+.dot--current {
   position:relative;
   border:2px solid var(--red);
   cursor:pointer;
 }
 
-.image-carousel__dot:hover::before {
+.image-carousel__dot:hover::before,
+.dot--current::before {
   content:'';
   position:absolute;
   top:0;
@@ -184,6 +233,17 @@ const Wrapper = styled.div`
       text-align:center;
       width:100%;
     }
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
