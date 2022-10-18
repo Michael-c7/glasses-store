@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 /*the banner of imgs w/ text under the imageCarousel */
 import { Button1 } from '../styledComponents/Button1'
 import { Button2 } from '../styledComponents/Button2'
@@ -20,7 +21,9 @@ const Banner1 = () => {
           <div className='banner1__box__info'>
             <h2 className='banner1__box__heading'>Best Collection</h2>
             <h3 className='banner1__box__sub-heading'>Up to 40% off on selected items</h3>
-            <Button1>Shop Now</Button1>
+            <Link to='/products'>
+              <Button1>Shop Now</Button1>
+            </Link>
           </div>
         </div>
       </div>
@@ -30,14 +33,18 @@ const Banner1 = () => {
           <div className='banner1__box banner1__box-2'>
               <img className='banner1__box__image' src={manImage} alt='people'/>
               <div className='banner1__box__info'>
+              <Link to='/products'>
                 <Button2>Shop Now</Button2>
+              </Link>
               </div>
           </div>
 
           <div className='banner1__box banner1__box-3'>
               <img className='banner1__box__image' src={womanImage} alt='people'/>
               <div className='banner1__box__info'>
+              <Link to='/products'>
                 <Button2>Shop Now</Button2>
+              </Link>
               </div>
           </div>
         </div>
@@ -47,7 +54,9 @@ const Banner1 = () => {
           <div className='banner1__box__info'>
             <h2 className='banner1__box__heading'>Summer Sale</h2>
             <h3 className='banner1__box__sub-heading'>20% off any designer sunglasses</h3>
-            <Button1>Shop Now</Button1>
+            <Link to='/products'>
+              <Button1>Shop Now</Button1>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+
 import Image1 from '../assets/image_carousel_images/christian-buehner-DItYlc26zVI-unsplash.jpg'
 import Image2 from '../assets/image_carousel_images/christina-wocintechchat-com-50TkCaP8M3A-unsplash.jpg'
 import Image3 from '../assets/image_carousel_images/AdobeStock_534825688.jpeg'
-import Image4 from '../assets/image_carousel_images/AdobeStock_86658618.png'
+import Image4 from '../assets/image_carousel_images/AdobeStock_86658618.jpeg'
+
 import { Button1 } from '../styledComponents/Button1'
 import { Link } from 'react-router-dom'
 import { GrPrevious, GrNext } from 'react-icons/gr'
@@ -80,10 +82,10 @@ const ImageCarousel = () => {
           if (currentSlideIndex === index) {
             slidePosition = 'slide--current';
           }
-          if (
-            currentSlideIndex === index - 1 ||
+          if 
+            (currentSlideIndex === index - 1 || 
             (index === 0 && currentSlideIndex === carouselData.length - 1)
-          ) {
+            ) {
             slidePosition = 'slide--prev';
           }
 
