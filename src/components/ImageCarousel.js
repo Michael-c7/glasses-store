@@ -220,7 +220,7 @@ const Wrapper = styled.div`
   .movement-btn {
     position:absolute;
     border:none;
-    background:rgba(25,25,25,0.25);
+    background:rgba(25,25,25,0.2);
     padding:0 1rem;
     opacity:0.8;
     transition: opacity 0.85s ease, background 0.5s ease;
@@ -232,6 +232,7 @@ const Wrapper = styled.div`
   .movement-btn-prev {
     left:0;
   }
+  
 
   .movement-btn-next {
     left:100%;
@@ -240,11 +241,7 @@ const Wrapper = styled.div`
 
   .movement-btn:hover {
     cursor:pointer;
-    background:rgba(25,25,25,0.35);
-  }
-
-  .image-carousel__slide:hover .movement-btn {
-    opacity:1;
+    background:rgba(25,25,25,0.30);
   }
 
 
