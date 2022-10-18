@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 /*the banner of imgs w/ text under the imageCarousel */
 import { Button1 } from '../styledComponents/Button1'
+import { Button2 } from '../styledComponents/Button2'
+
+
 
 import coupleImage from '../assets/banner1_images/banner-1__couple.png'
 import manImage from '../assets/banner1_images/banner-1__man.png'
@@ -27,14 +30,14 @@ const Banner1 = () => {
           <div className='banner1__box banner1__box-2'>
               <img className='banner1__box__image' src={manImage} alt='people'/>
               <div className='banner1__box__info'>
-                <Button1>Shop Now</Button1>
+                <Button2>Shop Now</Button2>
               </div>
           </div>
 
           <div className='banner1__box banner1__box-3'>
               <img className='banner1__box__image' src={womanImage} alt='people'/>
               <div className='banner1__box__info'>
-                <Button1>Shop Now</Button1>
+                <Button2>Shop Now</Button2>
               </div>
           </div>
         </div>
@@ -103,7 +106,6 @@ const Wrapper = styled.section`
   }
 
   .banner1__box .banner1__box__image:hover {
-    
     transform:scale(1.1);
   }
 
@@ -180,7 +182,6 @@ const Wrapper = styled.section`
   // type 2
   .banner1__box-2 .banner1__box__info,
   .banner1__box-3 .banner1__box__info {
-    background:blue;
     left:50%;
     top:90%;
     transform:translate(-50%, -90%);
@@ -188,9 +189,27 @@ const Wrapper = styled.section`
   }
 
  
+  @media only screen and (max-width: 1024px) {
+    .banner1__box-1 .banner1__box__image {
+      width:60rem;
+      bottom:0;
+      right:0;
+      margin-right:-15%;
+    }
 
-  img {
-    width:200px;
+
+
+    // type 1
+    .banner1__box-1 .banner1__box__info,
+    .banner1__box-4 .banner1__box__info {
+      bottom:0;
+      margin-bottom:2rem;
+      margin-left:0rem;
+      left:50%;
+      transform:translateX(-50%);
+      text-align:center;
+    }
+
   }
 
 `
