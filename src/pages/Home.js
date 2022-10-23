@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <ImageCarousel/>
-      {/* <Banner1/> */}
+      <Banner1/>
     </>
   )
 }
