@@ -2,6 +2,7 @@ import React from 'react'
 
 import ImageCarousel from '../components/ImageCarousel'
 import Banner1 from '../components/Banner1'
+import ServiceBanner from '../components/ServiceBanner'
 
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
     <>
       <ImageCarousel/>
       <Banner1/>
+      <ServiceBanner/>
     </>
   )
 }
