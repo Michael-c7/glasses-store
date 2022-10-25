@@ -8,12 +8,13 @@ import womensGlasses from '../assets/categoryCarousel/womens-glasses.jpg'
 import womensSunglasses from '../assets/categoryCarousel/womens-sunglasses.jpg'
 import kidsGlasses from '../assets/categoryCarousel/kids-glasses.jpg'
 import kidsSunglasses from '../assets/categoryCarousel/kids-sunglasses.jpg'
+import parallaxImage from '../assets/categoryCarousel/parallax-img.jpg'
 // icons
 import { GrPrevious, GrNext } from 'react-icons/gr'
 
 
 const CategoriesCarousel = () => {
-    const categoriesCarouselData = [
+     const categoriesCarouselData = [
         {
             image:mensGlasses,
             heading:'Mens Glasses'
@@ -41,30 +42,38 @@ const CategoriesCarousel = () => {
     ]
 
 
+    let cardsInSingleSlideAmt = 2;
+    let totalSlideAmt = Math.round(cardsInSingleSlideAmt / categoriesCarouselData.length)
+
+    console.log(totalSlideAmt)
+
+    let slides = Array.from(({length:2}))
+
+
+
+
+
 
   return (
     <Wrapper>
-        <div className='categoriesCarousel__carousel-container'>
-            <button className='categoriesCarousel__slide-btn'>
-                <GrPrevious className='categoriesCarousel__slide-icon'/>
-            </button>
-            <ul className='categoriesCarousel__slides'>
-                {categoriesCarouselData.map((slide, index) => {
-                    return (
-                        <li key={index} className='categoriesCarousel__slide'>
-                            <img src={slide.image} alt={slide.heading}/>
-                            <div className='categoriesCarousel__info'>
-                                <h2 className='categoriesCarousel__heading'>
-                                    {slide.heading}
-                                </h2>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-            <button className='categoriesCarousel__slide-btn'>
-                <GrNext className='categoriesCarousel__slide-icon'/>
-            </button>
+        <div className='parallax'></div>
+        
+        <div className='categoriesCarousel-container'>
+            <h2 className='categoriesCarousel__heading'>Categories</h2>
+            <div className='categoriesCarousel__slides-outer-container'>
+                <div className='categoriesCarousel__slides-container'>
+                    <ul className='categoriesCarousel__slides'>
+                        {categoriesCarouselData.map((item, index) => {
+                            const { image, heading } = item
+                            return (
+                                <li className='categoriesCarousel__slide' key={index}>
+                                    <img className='categoriesCarousel__image' src={image} alt={heading}/>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            </div>
         </div>
     </Wrapper>
   )
@@ -73,9 +82,53 @@ const CategoriesCarousel = () => {
 export default CategoriesCarousel
 
 const Wrapper = styled.section`
+    position:relative;
+    height:600px;
+
+    .parallax {
+        height:100%;
+        background-image: url(${parallaxImage});
+    /* creates the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    // to make image less noticeable
+        filter: brightness(0.5) grayscale(50%);
+        box-shadow: inset 0 0 100px #111;   
+    }
+
+    // removes the parallax effect for mobile
+    @media only screen and (max-device-width: 1024px) {
+        .parallax {
+          background-attachment: scroll;
+        }
+      }
+
+
+    .categoriesCarousel-container {
+        position:absolute;
+        top:0;
+        z-index:1;
+        left:50%;
+        top:50%;
+        transform:translate(-50%, -50%);
+    }
+
+    .categoriesCarousel__heading {
+        text-align:center;
+        font-size:2rem;
+        font-weight:500;
+        color:#fff;
+    }
+
 
 
     img {
-        max-width:100px;
+        width:200px;
     }
+
+
+
+
 `

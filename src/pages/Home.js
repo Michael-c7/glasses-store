@@ -13,6 +13,53 @@ const Home = () => {
       <Banner1/>
       <ServiceBanner/>
       <CategoriesCarousel/>
+      <p style={{fontSize:'2vw'}}>
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+        loremloremloremloremloremloremloremlorem
+      </p>
     </>
   )
 }
