@@ -64,6 +64,8 @@ const CategoriesCarousel = () => {
                 categoriesCarouselData[4],
                 categoriesCarouselData[5]
             ]
+        } else {
+            throw Error('index not found')
         }
     })
 
@@ -71,12 +73,13 @@ const CategoriesCarousel = () => {
     
 
 
-    const prevBtn = _ => {
-        console.log('prev btn')
-    }
+    const changeSlide = _ => {
+        if(currentSlideIndex === 0) {
+            setCurrentSlideIndex(1)
 
-    const nextBtn = _ => {
-        console.log('next btn')
+        } else {
+            setCurrentSlideIndex(0)
+        }
     }
 
 
@@ -87,14 +90,14 @@ const CategoriesCarousel = () => {
         <div className='categoriesCarousel-container'>
             <h2 className='categoriesCarousel__heading'>Categories</h2>
             <div className='categoriesCarousel__slides-outer-container'>
-                <button className='categoriesCarousel__slider-btn categoriesCarousel__prev-btn' onClick={prevBtn}>
+                <button className='categoriesCarousel__slider-btn categoriesCarousel__prev-btn' onClick={changeSlide}>
                     <GrPrevious/>
                 </button>
                 <div className='categoriesCarousel__slides-container'>
                     <ul className='categoriesCarousel__slides'>
                         {slides.map((_, index) => {
                             return (
-                                <li className={`categoriesCarousel__slide categoriesCarousel__slide--${index}`} key={index}>
+                                <li className={`categoriesCarousel__slide ${currentSlideIndex === index ? 'current-slide' : 'prev-slide'}`} key={index}>
                                     {slides[index].map((data, index) => {
                                         return (
                                             <Link className='categoriesCarousel__link' to='/products' key={index}>
@@ -110,7 +113,7 @@ const CategoriesCarousel = () => {
                         })}
                     </ul>
                 </div>
-                <button className='categoriesCarousel__slider-btn categoriesCarousel__next-btn' onClick={nextBtn}>
+                <button className='categoriesCarousel__slider-btn categoriesCarousel__next-btn' onClick={changeSlide}>
                     <GrNext/>
                 </button>
 
@@ -125,9 +128,10 @@ export default CategoriesCarousel
 const Wrapper = styled.section`
     --categoriesCarouselHeight:600px;
 
-
     position:relative;
     height:var(--categoriesCarouselHeight);
+
+
 
     .parallax {
         height:100%;
@@ -156,13 +160,6 @@ const Wrapper = styled.section`
 
 
 
-
-
-
-
-
-
-
       .categoriesCarousel-container {
         position:absolute;
         top:0;
@@ -172,27 +169,23 @@ const Wrapper = styled.section`
         transform:translate(-50%, -50%);
         width:1000px;
         height:100%;
-        // background:orange;
     }
 
     .categoriesCarousel__heading {
         text-align:center;
-        font-size:3rem;
+        font-size:2.25rem;
         font-weight:500;
         color:#fff;
         position:absolute;
         z-index:10;
-
         left:50%;
         transform:translateX(-50%);
-
-        margin-top:1rem;
+        margin-top:2rem;
     }
 
 
     .categoriesCarousel__slides-outer-container {
         overflow:hidden;
-        
     }
 
 
@@ -202,6 +195,7 @@ const Wrapper = styled.section`
         transform:translateY(-50%);
         width:50px;
         height:50px;
+        border:none;
         font-size:1.5rem;
         display:flex;
         justify-content:center;
@@ -213,7 +207,6 @@ const Wrapper = styled.section`
     .categoriesCarousel__prev-btn {
         left:0;
         margin-left:-4rem;
-
     }
 
     .categoriesCarousel__next-btn {
@@ -221,17 +214,11 @@ const Wrapper = styled.section`
         margin-right:-4rem;
     }
 
-
-
-
-
-
-
     .categoriesCarousel__slides {
         position:relative;
         display:flex;
         width:100%;
-        height:var(--categoriesCarouselHeight);      
+        height:var(--categoriesCarouselHeight);  
     }
     
     .categoriesCarousel__slide {
@@ -242,18 +229,22 @@ const Wrapper = styled.section`
         gap:2rem;
         top:50%;
         transform:translateY(-50%);
+        transition:0.5s ease;
     }
 
-    .categoriesCarousel__slide--1 {
+    .prev-slide {
         transform:translateY(-50%) translateX(100%);
     }
 
+    .current-slide {
+        transform:translateY(-50%) translateX(0%);
+        z-index:10;
+    }
 
     .categoriesCarousel__link {
         flex:1;
         position:relative;
     }
-
 
     .categoriesCarousel__slide-img {
         width:100%;
@@ -276,6 +267,47 @@ const Wrapper = styled.section`
         color:var(--white);
         text-align:center;
     }
+
+
+
+
+
+
+    // mobile view
+    @media (max-width: 1200px) {
+        .categoriesCarousel-container {
+            transform:translate(-50%, -50%) scale(0.85);
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .categoriesCarousel-container {
+            transform:translate(-50%, -50%) scale(0.65);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .categoriesCarousel-container {
+            transform:translate(-50%, -50%) scale(0.50);
+        }
+    }
+
+    @media (max-width: 600px) {
+        // --categoriesCarouselHeight:400px;
+
+        .categoriesCarousel-container {
+            transform:translate(-50%, -50%) scale(0.35);
+        }
+    }
+
+    @media (max-width: 435px) {
+        // --categoriesCarouselHeight:100px;
+
+        .categoriesCarousel-container {
+            transform:translate(-50%, -50%) scale(0.25);
+        }
+    }
+
 
 
 `
