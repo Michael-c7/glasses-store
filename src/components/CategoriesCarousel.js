@@ -15,8 +15,23 @@ import parallaxImage from '../assets/categoryCarousel/parallax-img.jpg'
 import { GrPrevious, GrNext } from 'react-icons/gr'
 
 
+
+
 const CategoriesCarousel = () => {
-    const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0)
+    const [currentSlideIndex, setCurrentSlideIndex] = React.useState(1)
+
+
+
+    const prevSlide = _ => {
+        setCurrentSlideIndex(currentSlideIndex - 1)
+    }
+
+    const nextSlide = _ => {
+        setCurrentSlideIndex(currentSlideIndex + 1)
+
+    }
+
+
 
 
      const categoriesCarouselData = [
@@ -54,15 +69,15 @@ const CategoriesCarousel = () => {
         <div className='categoriesCarousel__outer-container'>
             <h2 className='categoriesCarousel__heading'>Categories</h2>
 
+            <button className='categoriesCarousel__slider-btn categoriesCarousel__prev-btn'>
+                <GrPrevious/>
+            </button>
+
+            <button className='categoriesCarousel__slider-btn categoriesCarousel__next-btn' onClick={nextSlide}>
+                <GrNext/>
+            </button>
+
             <div className='categoriesCarousel__inner-container'>
-                <button className='categoriesCarousel__slider-btn categoriesCarousel__prev-btn'>
-                    <GrPrevious/>
-                </button>
-
-                <button className='categoriesCarousel__slider-btn categoriesCarousel__next-btn'>
-                    <GrNext/>
-                </button>
-
 
                 <ul className='categoriesCarousel__slides'>
                     {categoriesCarouselData.map((element) => {
@@ -86,12 +101,20 @@ const CategoriesCarousel = () => {
 
 export default CategoriesCarousel
 
+
+
 const Wrapper = styled.section`
         --categoriesCarouselHeight:600px;
         --card-width:400px;
         --card-amt-shown:3;
-        --card-outer-width:calc(var(--card-width) * var(--card-amt-shown));
+        /*
+        this part is the actual width --> calc(var(--card-width) * var(--card-amt-shown)
+        this part is the spacing --> (var(--card-amt-shown) * 1rem))
+        */
+        --card-outer-width:calc(var(--card-width) * var(--card-amt-shown) + (var(--card-amt-shown) * 1rem));
 
+
+        
         position:relative;
         height:var(--categoriesCarouselHeight);
 
@@ -135,15 +158,15 @@ const Wrapper = styled.section`
 
 
         .categoriesCarousel__outer-container {
-            // background:rgba(0,155,0,0.2);
             position:absolute;
-            top:0;
             color:#fff;
             width:var(--card-outer-width);
             left:50%;
             top:0%;
             transform:translate(-50%, -0%);
-            height:600px;
+            height:100%;
+            // margin-top:3rem;
+            margin-top:-1rem;
         }
 
 
@@ -158,12 +181,6 @@ const Wrapper = styled.section`
 
 
 
-        .categoriesCarousel__inner-container {
-            overflow:hidden;
-
-        }
-
-
         .categoriesCarousel__slider-btn  {
             position:absolute;
             width:50px;
@@ -176,8 +193,8 @@ const Wrapper = styled.section`
             border-radius:100px;
             cursor:pointer;
             z-index:10;
-
-            top:50%;
+            --headingSectionHeight:50.39px;
+            top:calc(50% + var(--headingSectionHeight));
             transform:translateY(-50%);
         }
 
@@ -190,19 +207,37 @@ const Wrapper = styled.section`
             margin-right:-4rem;
         }
 
+        .categoriesCarousel__inner-container {
+            position:absolute;
+            overflow:hidden;
+            width:100%;
+            height:100%;
+        }
 
         .categoriesCarousel__slides {
             position:absolute;
             display:flex;
             height:500px;
-            // gap:1rem;
             
+            --spacing:1rem;
+            /*use this is index to control the current slide*/
+            --current-index:0;
+            --card-spacing-trans:var(--spacing) * var(--current-index);
+            --card-width-trans:((calc(-1 * var(--card-width))) * var(--current-index));
+            /*how the card transitions*/
+            --card-width-full-trans:calc((-400px * var(--current-index)) - (var(--spacing) * var(--current-index)));
+
+            transform:translateX(var(--card-width-full-trans));
+            transition: 0.5s ease;
         }
+
+
         .categoriesCarousel__slide {
             position:relative;
             width:var(--card-width);
             height:100%;
-            
+
+            margin:0 0.5rem;
         }
 
 
