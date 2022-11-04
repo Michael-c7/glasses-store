@@ -4,7 +4,7 @@ import ImageCarousel from '../components/ImageCarousel'
 import Banner1 from '../components/Banner1'
 import ServiceBanner from '../components/ServiceBanner'
 import CategoriesCarousel from '../components/CategoriesCarousel'
-
+import ProductTabs from '../components/ProductTabs'
 const Home = () => {
 
   return (
@@ -13,7 +13,9 @@ const Home = () => {
       <Banner1/>
       <ServiceBanner/>
       <CategoriesCarousel/>
-      <p style={{fontSize:'2vw'}}>
+      <ProductTabs/>
+
+      {/* <p style={{fontSize:'2vw'}}>
         loremloremloremloremloremloremloremlorem
         loremloremloremloremloremloremloremlorem
         loremloremloremloremloremloremloremlorem
@@ -59,7 +61,7 @@ const Home = () => {
         loremloremloremloremloremloremloremlorem
         loremloremloremloremloremloremloremlorem
         loremloremloremloremloremloremloremlorem
-      </p>
+      </p> */}
     </>
   )
 }
