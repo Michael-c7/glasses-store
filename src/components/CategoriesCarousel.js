@@ -18,20 +18,56 @@ import { GrPrevious, GrNext } from 'react-icons/gr'
 
 
 const CategoriesCarousel = () => {
-    const [currentSlideIndex, setCurrentSlideIndex] = React.useState(1)
+    let [currentSlideIndex, setCurrentSlideIndex] = React.useState(0)
+    // 1rem --> 16px, spacing in pixels
+    let spacing = 16;
+    let cardSpacingTrans = spacing * currentSlideIndex;
+    // cardWidth in pixels
+    let cardWidth = 400;
+    let cardWidthTrans = -cardWidth * currentSlideIndex;
+    let cardWidthFullTrans = cardWidthTrans - cardSpacingTrans;
 
+    let [visibleCardAmt, setVisibleCardAmt] = React.useState(3)
+    let [totalWidth, setTotalWidth] = React.useState(window.innerWidth)
 
 
     const prevSlide = _ => {
+        // will have to take into account the amount of cards on screen
         setCurrentSlideIndex(currentSlideIndex - 1)
     }
 
     const nextSlide = _ => {
+        // will have to take into account the amount of cards on screen
         setCurrentSlideIndex(currentSlideIndex + 1)
 
     }
 
 
+    const getWidth = _ => {
+        // console.log(window.innerWidth)
+        setTotalWidth(window.innerWidth)
+    }
+
+    React.useEffect(() => {
+        window.addEventListener("resize", getWidth);
+        return () => window.removeEventListener('resize',getWidth)
+    })
+
+
+    React.useEffect(() => {
+        // the breakpoint are where the card amount shown on screen changes
+        // the breakpoints are in pixels
+        let firstBreakpoint = 768;
+        let secondBreakPoint = 500;
+        if(totalWidth <= firstBreakpoint) {
+            setVisibleCardAmt(2)
+        } else if(totalWidth <= secondBreakPoint) {
+            setVisibleCardAmt(1)
+        } else {
+            // 3 is the default amount of cards shown on screen
+            setVisibleCardAmt(3)
+        }
+    }, [totalWidth])
 
 
      const categoriesCarouselData = [
@@ -62,14 +98,19 @@ const CategoriesCarousel = () => {
     ]
 
 
+
+
+
+
+
   return (
     <Wrapper>
         <div className='parallax'></div>
-        
+
         <div className='categoriesCarousel__outer-container'>
             <h2 className='categoriesCarousel__heading'>Categories</h2>
 
-            <button className='categoriesCarousel__slider-btn categoriesCarousel__prev-btn'>
+            <button className='categoriesCarousel__slider-btn categoriesCarousel__prev-btn' onClick={prevSlide}>
                 <GrPrevious/>
             </button>
 
@@ -79,10 +120,10 @@ const CategoriesCarousel = () => {
 
             <div className='categoriesCarousel__inner-container'>
 
-                <ul className='categoriesCarousel__slides'>
-                    {categoriesCarouselData.map((element) => {
+                <ul className='categoriesCarousel__slides' style={{transform:`translateX(${cardWidthFullTrans}px)`}}>
+                    {categoriesCarouselData.map((element, index) => {
                         return (
-                            <li className='categoriesCarousel__slide'>
+                            <li className='categoriesCarousel__slide' key={index}>
                                 <Link to='products' className='categoriesCarousel__slide__link'>
                                     <img className='categoriesCarousel__slide-img' src={element.image} alt={element.heading}/>
                                     <div className='categoriesCarousel__heading-container'>
@@ -217,7 +258,7 @@ const Wrapper = styled.section`
         .categoriesCarousel__slides {
             position:absolute;
             display:flex;
-            height:500px;
+            height:calc(var(--categoriesCarouselHeight) - 100px);
             
             --spacing:1rem;
             /*use this is index to control the current slide*/
@@ -227,7 +268,7 @@ const Wrapper = styled.section`
             /*how the card transitions*/
             --card-width-full-trans:calc((-400px * var(--current-index)) - (var(--spacing) * var(--current-index)));
 
-            transform:translateX(var(--card-width-full-trans));
+            // transform:translateX(var(--card-width-full-trans));
             transition: 0.5s ease;
         }
 
@@ -261,6 +302,78 @@ const Wrapper = styled.section`
             padding:0.5rem 0;
             color:var(--white);
             text-align:center;
+        }
+
+
+
+
+
+
+
+
+
+        @media (max-width: 1435px) {
+            // --categoriesCarouselHeight:550px;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.8);
+            }
+        }
+
+        @media (max-width: 1145px) {
+            // --categoriesCarouselHeight:500px;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.7);
+            }
+
+            .categoriesCarousel__slides {
+                height:var(--categoriesCarouselHeight);
+            }
+        }
+
+        @media (max-width:1000px) {
+            // --categoriesCarouselHeight:500px;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.6);
+            }
+
+        @media (max-width: 870px) {
+            // --categoriesCarouselHeight:500px;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.535);
+            }
+        }
+        
+
+        @media (max-width: 768px) {
+            --categoriesCarouselHeight:500px;
+            --card-amt-shown:2;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.6);
+            }
+        }
+
+
+        @media (max-width: 600px) {
+            // --categoriesCarouselHeight:500px;
+            --card-amt-shown:1;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.7);
+            }
+        }
+
+        @media (max-width: 425px) {
+            // --categoriesCarouselHeight:500px;
+            --card-amt-shown:1;
+
+            .categoriesCarousel__outer-container {
+                transform:translate(-50%, -0%) scale(0.55);
+            }
         }
 
 `
