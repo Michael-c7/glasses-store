@@ -14,7 +14,32 @@ import parallaxImage from '../assets/categoryCarousel/parallax-img.jpg'
 // icons
 import { GrPrevious, GrNext } from 'react-icons/gr'
 
-
+const categoriesCarouselData = [
+    {
+        image:mensGlasses,
+        heading:'Mens Glasses'
+    },
+    {
+        image:mensSunglasses,
+        heading:'Mens Sunglasses'
+    },
+    {
+        image:womensGlasses,
+        heading:'Womens Glasses'
+    },
+    {
+        image:womensSunglasses,
+        heading:'Womens Sunglasses'
+    },
+    {
+        image:kidsGlasses,
+        heading:'Kids Glasses'
+    },
+    {
+        image:kidsSunglasses,
+        heading:'Kids Sunglasses'
+    },
+]
 
 
 const CategoriesCarousel = () => {
@@ -29,17 +54,30 @@ const CategoriesCarousel = () => {
 
     let [visibleCardAmt, setVisibleCardAmt] = React.useState(3)
     let [totalWidth, setTotalWidth] = React.useState(window.innerWidth)
+    let lastSlideIndex = visibleCardAmt > 1 ? (categoriesCarouselData.length / visibleCardAmt) + 1 : categoriesCarouselData.length - 1;
+
+
+    React.useEffect(() => {
+        console.log()
+    }, [])
 
 
     const prevSlide = _ => {
-        // will have to take into account the amount of cards on screen
-        setCurrentSlideIndex(currentSlideIndex - 1)
+        if(currentSlideIndex === 0) {
+            setCurrentSlideIndex(lastSlideIndex)
+        } else {
+            setCurrentSlideIndex(currentSlideIndex - 1)
+        }
     }
 
-    const nextSlide = _ => {
-        // will have to take into account the amount of cards on screen
-        setCurrentSlideIndex(currentSlideIndex + 1)
 
+
+    const nextSlide = _ => {
+        if(currentSlideIndex === lastSlideIndex) {
+            setCurrentSlideIndex(0)
+        } else {
+            setCurrentSlideIndex(currentSlideIndex + 1)
+        }
     }
 
 
@@ -58,8 +96,8 @@ const CategoriesCarousel = () => {
         // the breakpoint are where the card amount shown on screen changes
         // the breakpoints are in pixels
         let firstBreakpoint = 768;
-        let secondBreakPoint = 500;
-        if(totalWidth <= firstBreakpoint) {
+        let secondBreakPoint = 600;
+        if(totalWidth <= firstBreakpoint && totalWidth >= secondBreakPoint) {
             setVisibleCardAmt(2)
         } else if(totalWidth <= secondBreakPoint) {
             setVisibleCardAmt(1)
@@ -70,32 +108,7 @@ const CategoriesCarousel = () => {
     }, [totalWidth])
 
 
-     const categoriesCarouselData = [
-        {
-            image:mensGlasses,
-            heading:'Mens Glasses'
-        },
-        {
-            image:mensSunglasses,
-            heading:'Mens Sunglasses'
-        },
-        {
-            image:womensGlasses,
-            heading:'Womens Glasses'
-        },
-        {
-            image:womensSunglasses,
-            heading:'Womens Sunglasses'
-        },
-        {
-            image:kidsGlasses,
-            heading:'Kids Glasses'
-        },
-        {
-            image:kidsSunglasses,
-            heading:'Kids Sunglasses'
-        },
-    ]
+
 
 
 
@@ -151,6 +164,7 @@ const Wrapper = styled.section`
         /*
         this part is the actual width --> calc(var(--card-width) * var(--card-amt-shown)
         this part is the spacing --> (var(--card-amt-shown) * 1rem))
+        the entire thing is the width plus the spacing
         */
         --card-outer-width:calc(var(--card-width) * var(--card-amt-shown) + (var(--card-amt-shown) * 1rem));
 
@@ -313,35 +327,30 @@ const Wrapper = styled.section`
 
 
         @media (max-width: 1435px) {
-            // --categoriesCarouselHeight:550px;
-
             .categoriesCarousel__outer-container {
                 transform:translate(-50%, -0%) scale(0.8);
             }
         }
 
         @media (max-width: 1145px) {
-            // --categoriesCarouselHeight:500px;
-
             .categoriesCarousel__outer-container {
                 transform:translate(-50%, -0%) scale(0.7);
             }
 
             .categoriesCarousel__slides {
-                height:var(--categoriesCarouselHeight);
+                // height:var(--categoriesCarouselHeight);
             }
         }
 
         @media (max-width:1000px) {
-            // --categoriesCarouselHeight:500px;
+        --categoriesCarouselHeight:500px;
+
 
             .categoriesCarousel__outer-container {
                 transform:translate(-50%, -0%) scale(0.6);
             }
 
         @media (max-width: 870px) {
-            // --categoriesCarouselHeight:500px;
-
             .categoriesCarousel__outer-container {
                 transform:translate(-50%, -0%) scale(0.535);
             }
@@ -349,7 +358,7 @@ const Wrapper = styled.section`
         
 
         @media (max-width: 768px) {
-            --categoriesCarouselHeight:500px;
+            // --categoriesCarouselHeight:500px;
             --card-amt-shown:2;
 
             .categoriesCarousel__outer-container {
@@ -359,7 +368,6 @@ const Wrapper = styled.section`
 
 
         @media (max-width: 600px) {
-            // --categoriesCarouselHeight:500px;
             --card-amt-shown:1;
 
             .categoriesCarousel__outer-container {
@@ -368,7 +376,6 @@ const Wrapper = styled.section`
         }
 
         @media (max-width: 425px) {
-            // --categoriesCarouselHeight:500px;
             --card-amt-shown:1;
 
             .categoriesCarousel__outer-container {
