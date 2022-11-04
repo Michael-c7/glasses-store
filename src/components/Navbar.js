@@ -115,6 +115,7 @@ const Wrapper = styled.nav`
 
   .navbar__item:hover {
     color:var(--red);
+    cursor:pointer;
   }
 
   .navbar__item:after {
