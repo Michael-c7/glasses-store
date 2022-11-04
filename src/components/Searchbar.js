@@ -28,6 +28,8 @@ const Wrapper = styled.div`
         width:100%;
         padding:0.25rem 0;
         font-family: 'Josefin Sans', sans-serif;
+        font-size:1rem;
+
     }
 
     .searchbar__search-input::placeholder {
@@ -37,7 +39,7 @@ const Wrapper = styled.div`
 
 
     .searchbar__icon {
-        font-size:1.2rem;
+        font-size:1.25rem;
     }
     
 `
