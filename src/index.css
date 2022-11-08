@@ -8,6 +8,13 @@
   --gray-main:#757575;
   --gray-secondary:#dddddd;
   --white:#f7f7f7;
+
+  
+  --card-width:400px;
+  /*change --card-amt-shown to 2 at 768px and to 1 at 600px*/
+  --card-amt-shown:3;
+  --card-spacing-amt:1rem;
+  --card-outer-width:calc(var(--card-width) * var(--card-amt-shown) + (var(--card-amt-shown) * var(--card-spacing-amt)));
 }
 
 *,
@@ -48,3 +55,4 @@ a {
   top:50%;
   left:50%;
 }
+
