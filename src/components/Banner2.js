@@ -6,6 +6,8 @@ import womenImage from '../assets/banner2_images/banner2__women.png'
 import kidImage from '../assets/banner2_images/banner2__kid.png'
 
 
+import {Button2} from '../styledComponents/Button2'
+
 const Banner2 = () => {
     const banner2Data = [
         {
@@ -25,7 +27,6 @@ const Banner2 = () => {
         }
     ]
 
-
     
   return (
     <Wrapper>
@@ -35,8 +36,13 @@ const Banner2 = () => {
                     <li className='banner2__item'style={{backgroundColor:item.bgColor}} key={index}>
                         <img className={`banner2__img banner2__img--${index}`} src={item.img} alt={item.text}/>
                         <div className='banner2__info'>
-                            <h2 className='banner2__heading'><div>{item.text.slice(0,12)}</div>{item.text.slice(12)}</h2>
-                            <button className='banner2__shop-btn'>Shop Now</button>
+                            <h2 className='banner2__heading'>{item.text}</h2>
+                            <Button2 style={
+                                {fontSize:'0.85rem',
+                                marginTop:'0.75rem',
+                                padding:'1rem 1.75rem',
+                                '--hover-bg-color':'var(--red)'}
+                            }>Shop Now</Button2>
                         </div>
                     </li>
                 )
@@ -64,7 +70,7 @@ const Wrapper = styled.section`
         flex:1;
         margin:0 0.75rem;
         position:relative;
-        // overflow:hidden;
+        overflow:hidden;
     }
 
     .banner2__info {
@@ -74,6 +80,7 @@ const Wrapper = styled.section`
         bottom:0;
         margin:2rem;
         color:#fff;
+
         
     }
 
@@ -85,13 +92,13 @@ const Wrapper = styled.section`
         transform:translate(-50%, -100%);
     }
 
+
     .banner2__img--0 {
-        max-width:270px;
-        width:25vh;
+        width:270px;
     }
 
     .banner2__img--1 {
-        width:290px;
+        width:400px;
     }
 
     .banner2__img--2 {
@@ -101,16 +108,56 @@ const Wrapper = styled.section`
 
     .banner2__heading {
         font-weight:400;
+        font-size:1.5rem;
+        width:12ch;
     }
 
-    .banner2__shop-btn {
-        border:none;
-        background:none;
-        color:#fff;
-        font-size:1.1rem;
-        margin-top:1rem;
-    }
 
+
+
+    
+
+    @media (max-width: 768px) {
+        height:1200px;
+
+        .banner2__items {
+            display:flex;
+            width:inherit;
+            height:100%;
+            flex-direction:column;
+        }
+
+        .banner2__item {
+            margin:0 0.5rem;
+        }
+
+
+        .banner2__img--0 {
+            width:220px;
+        }
+    
+        .banner2__img--1 {
+            width:325px;
+        }
+    
+        .banner2__img--2 {
+            width:275px;
+        }
+
+        .banner2__info {
+            position:relative;
+            margin:0 auto 0 auto;
+            text-align:center;
+            top:calc(100% - 1rem);
+            transform:translateY(-100%);
+        }
+
+        .banner2__heading {
+            margin:0 auto;
+            background:rgba(50,50,50,0.85);
+            padding:0.25rem 0.5rem;
+        }
+    }
 
 
 `
