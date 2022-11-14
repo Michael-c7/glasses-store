@@ -5,6 +5,12 @@ import Banner1 from '../components/Banner1'
 import ServiceBanner from '../components/ServiceBanner'
 import CategoriesCarousel from '../components/CategoriesCarousel'
 import ProductTabs from '../components/ProductTabs'
+import Banner2 from '../components/Banner2'
+import FeaturedCarousel from '../components/FeaturedCarousel'
+import Newsletter from '../components/Newsletter'
+
+
+
 const Home = () => {
 
   return (
@@ -14,6 +20,9 @@ const Home = () => {
       <ServiceBanner/>
       <CategoriesCarousel/>
       <ProductTabs/>
+      <Banner2/>
+      <FeaturedCarousel/>
+      <Newsletter/>
 
       {/* <p style={{fontSize:'2vw'}}>
         loremloremloremloremloremloremloremlorem
