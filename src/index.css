@@ -15,6 +15,10 @@
   --card-amt-shown:3;
   --card-spacing-amt:1rem;
   --card-outer-width:calc(var(--card-width) * var(--card-amt-shown) + (var(--card-amt-shown) * var(--card-spacing-amt)));
+
+  --base-font-stack: 'Josefin Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
 }
 
 *,
@@ -46,6 +50,10 @@ ul {
 a {
   color:inherit;
   text-decoration: none;
+}
+
+button, input {
+  font-family:var(--base-font-stack);
 }
 
 
