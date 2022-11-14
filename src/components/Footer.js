@@ -11,5 +11,4 @@ const Footer = () => {
 export default Footer
 
 const Wrapper = styled.footer`
-
 `

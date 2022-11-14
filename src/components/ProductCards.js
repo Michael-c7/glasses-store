@@ -18,7 +18,7 @@ const ProductCards = ({products}) => {
 export default ProductCards
 
 
-const Wrapper = styled.ul`
+const Wrapper = styled.div`
     width:100%;
     display:grid;
     grid-template-columns:repeat(4, 1fr);

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Button2 = styled.button`
+    --hover-bg-color:var(--black);
+
     border:none;
     background:var(--white);
     color:var(--black);
@@ -16,7 +18,7 @@ export const Button2 = styled.button`
     :hover {
         cursor:pointer;
         color:var(--white);
-        background:var(--black);
+        background:var(--hover-bg-color);
     }
 
 `

@@ -8,7 +8,6 @@ import StarRating from '../components/StarRating'
 
 const ProductCard = ({product}) => {
     const { fields } = product
-
     /*the number that fields.price
     is multiplied by is an
     arbitrarily chosen number */
@@ -34,7 +33,7 @@ const ProductCard = ({product}) => {
 export default ProductCard
 
 
-const Wrapper = styled.li`
+const Wrapper = styled.div`
     --background-card-color:#F7F7F7;
 
     position:relative;
@@ -47,11 +46,7 @@ const Wrapper = styled.li`
         background:var(--background-card-color);
     }
 
-
-
-
-
-
+    
     .productCard__image {
         width:100%;
         height:100%;

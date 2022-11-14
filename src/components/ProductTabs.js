@@ -44,8 +44,7 @@ const ProductTabs = () => {
 
             <div className='productTabs__products-container'>
                 {productsTabsData.map((_, index) => {
-                    let products = productsTabsData[index].products
-                    
+                    let products = productsTabsData[index].products                    
                     return (
                         <div className={`ProductCards__container ${isProductsShownIndex === index ? 'ProductCards__container--shown' : 'ProductCards__container--hidden'}`} key={index}>
                             <ProductCards {...{products}}/>

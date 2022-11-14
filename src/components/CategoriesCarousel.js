@@ -57,11 +57,6 @@ const CategoriesCarousel = () => {
     let lastSlideIndex = visibleCardAmt > 1 ? (categoriesCarouselData.length / visibleCardAmt) + 1 : categoriesCarouselData.length - 1;
 
 
-    React.useEffect(() => {
-        console.log()
-    }, [])
-
-
     const prevSlide = _ => {
         if(currentSlideIndex === 0) {
             setCurrentSlideIndex(lastSlideIndex)
@@ -82,7 +77,6 @@ const CategoriesCarousel = () => {
 
 
     const getWidth = _ => {
-        // console.log(window.innerWidth)
         setTotalWidth(window.innerWidth)
     }
 
@@ -161,12 +155,13 @@ const Wrapper = styled.section`
         --categoriesCarouselHeight:600px;
         --card-width:400px;
         --card-amt-shown:3;
+        --card-spacing-amt:1rem;
         /*
         this part is the actual width --> calc(var(--card-width) * var(--card-amt-shown)
-        this part is the spacing --> (var(--card-amt-shown) * 1rem))
+        this part is the spacing --> (var(--card-amt-shown) * var(--card-spacing-amt)))
         the entire thing is the width plus the spacing
         */
-        --card-outer-width:calc(var(--card-width) * var(--card-amt-shown) + (var(--card-amt-shown) * 1rem));
+        --card-outer-width:calc(var(--card-width) * var(--card-amt-shown) + (var(--card-amt-shown) * var(--card-spacing-amt)));
 
 
         
