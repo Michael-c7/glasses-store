@@ -192,6 +192,8 @@ const Wrapper = styled.nav`
         .navbar__searchbar--mobile {
           position:absolute;
           display:flex;
+          z-index:10;
+          margin-bottom:-1rem;
         }
 
         .navbar__searchbar-icons {
@@ -201,7 +203,6 @@ const Wrapper = styled.nav`
         .navbar__search-btn {
           border:none;
           background:none;
-
         }
 
         .navbar__search-btn .navbar__icon {
@@ -210,19 +211,19 @@ const Wrapper = styled.nav`
           top:3px;
         }
 
-      .navbar__searchbar {
+        .navbar__searchbar {
           display:none;
         }
 
-      .navbar__searchbar--mobile {
-        position:absolute;
-        display:block;
-        bottom:-1rem;
-        margin-left:2rem;
-        padding:0.5rem 1rem;
-        background:#fff;
-        filter: drop-shadow(0px 5px 5px rgba(100, 100, 100, 0.35));
-      }
+        .navbar__searchbar--mobile {
+          position:absolute;
+          display:block;
+          bottom:-1rem;
+          margin-left:2rem;
+          padding:0.5rem 1rem;
+          background:#fff;
+          filter: drop-shadow(0px 5px 5px rgba(100, 100, 100, 0.35));
+        }
       
     }
 

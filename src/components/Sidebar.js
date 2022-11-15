@@ -34,6 +34,8 @@ const Sidebar = () => {
 export default Sidebar
 
 const SidebarContainer = styled.nav`
+  --header-padding-amt:1rem;
+
   .sidebar {
     --sidebar-width:300px;
     position:absolute;
@@ -46,12 +48,19 @@ const SidebarContainer = styled.nav`
 
   
   .sidebar__header {
+    position:relative;
     display:flex;
     justify-content:space-between;
     align-items:center;
     background:var(--red);
     color:#fff;
-    padding:0.25rem 1rem;
+    padding:var(--header-padding-amt);
+  }
+
+
+  .sidebar__header > * {
+    padding-top:calc(var(--header-padding-amt) / 2);
+    font-weight:500;
   }
 
   .sidebar__close-btn {
@@ -60,6 +69,7 @@ const SidebarContainer = styled.nav`
     color:#fff;
     font-size:1.5rem;
     cursor:pointer;
+    margin-top:3px;
   }
 
   .sidebar__items {
