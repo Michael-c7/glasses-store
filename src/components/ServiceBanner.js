@@ -55,7 +55,7 @@ export default ServiceBanner
 
 
 const Wrapper = styled.section`
-    padding:2rem 0;
+    padding:4rem 0;
     background:#fff;
     width:100%;
 
@@ -69,7 +69,6 @@ const Wrapper = styled.section`
         margin:0 4rem;
         text-align:center;
     }
-
 
     .serviceBanner__icon-container {
         font-size:3rem;
@@ -88,6 +87,8 @@ const Wrapper = styled.section`
 
 
     @media only screen and (max-width: 1024px) {
+        padding:2rem 0;
+
         .serviceBanner__item {
             margin:0 2rem;
         }
