@@ -7,6 +7,7 @@ import kidImage from '../assets/banner2_images/banner2__kid.png'
 
 
 import {Button2} from '../styledComponents/Button2'
+import { Link } from 'react-router-dom'
 
 const Banner2 = () => {
     const banner2Data = [
@@ -37,12 +38,15 @@ const Banner2 = () => {
                         <img className={`banner2__img banner2__img--${index}`} src={item.img} alt={item.text}/>
                         <div className='banner2__info'>
                             <h2 className='banner2__heading'>{item.text}</h2>
-                            <Button2 style={
-                                {fontSize:'0.85rem',
-                                marginTop:'0.75rem',
-                                padding:'1rem 1.75rem',
-                                '--hover-bg-color':'var(--red)'}
-                            }>Shop Now</Button2>
+                            <Link to='/products'>
+                                <Button2 style={
+                                    {fontSize:'0.85rem',
+                                    marginTop:'0.75rem',
+                                    padding:'1rem 1.75rem',
+                                    '--hover-bg-color':'var(--red)'}
+                                }>Shop Now</Button2>
+                            </Link>
+
                         </div>
                     </li>
                 )
