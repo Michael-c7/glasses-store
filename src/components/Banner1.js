@@ -392,6 +392,18 @@ const Wrapper = styled.section`
           text-align:center;
         }
       }
+
+
+      @media only screen and (max-width: 375px) {
+
+        .box-4__image {
+          position:absolute;
+          max-width:275px;
+          right:0;
+          bottom:0;
+          margin-right:-2rem;
+        }
+      }
     }
   }
 
