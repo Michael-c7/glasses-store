@@ -1,45 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-
-import Image1 from '../assets/image_carousel_images/christian-buehner-DItYlc26zVI-unsplash.jpg'
-import Image2 from '../assets/image_carousel_images/christina-wocintechchat-com-50TkCaP8M3A-unsplash.jpg'
-import Image3 from '../assets/image_carousel_images/AdobeStock_534825688.jpeg'
-import Image4 from '../assets/image_carousel_images/AdobeStock_86658618.jpeg'
-
 import { Button1 } from '../styledComponents/Button1'
 import { Link } from 'react-router-dom'
 import { GrPrevious, GrNext } from 'react-icons/gr'
-
-
-const carouselData = [
-    {
-        image:Image1,
-        topHeading:'New Arrivals',
-        mainHeading:'Designer Collection',
-        subHeading:'Up to 25% off on all designer glasses',
-    },
-    {
-        image:Image2,
-        topHeading:`Spring ${new Date().getFullYear()}`,
-        mainHeading:'New Collection',
-        subHeading:'Up to 50% off on Eyeglasses',
-    },
-    {
-      image:Image3,
-      topHeading:`Great Deals`,
-      mainHeading:"Men's Collection",
-      subHeading:'Affordable glasses for everybody',
-    },
-    {
-      image:Image4,
-      topHeading:`Best Deals`,
-      mainHeading:"Women's Collection",
-      subHeading:'Up to 75% off on Sunglasses',
-    },
-]
-
-
-
+import { imageCarouselData } from '../utility/reusable'
 
 
 const ImageCarousel = () => {
@@ -52,14 +16,14 @@ const ImageCarousel = () => {
 
   const prevSlide = _ => {
     if(currentSlideIndex === 0) {
-      setCurrentSlideIndex(carouselData?.length - 1)
+      setCurrentSlideIndex(imageCarouselData?.length - 1)
       } else {
         setCurrentSlideIndex(currentSlideIndex - 1)
       }
   }
 
   const nextSlide = _ => {
-    if(currentSlideIndex === carouselData?.length - 1) {
+    if(currentSlideIndex === imageCarouselData?.length - 1) {
       setCurrentSlideIndex(currentSlideIndex = currentSlideIndex - currentSlideIndex)
       } else {
         setCurrentSlideIndex(currentSlideIndex = currentSlideIndex + 1)
@@ -69,7 +33,7 @@ const ImageCarousel = () => {
   return (
     <Wrapper>
       <ul className='image-carousel__slides'>
-        {carouselData.map((slide, index) => {
+        {imageCarouselData.map((slide, index) => {
           const {image, topHeading, mainHeading, subHeading} = slide
           /* 
           for the last slide --> slide--prev
@@ -84,7 +48,7 @@ const ImageCarousel = () => {
           }
           if 
             (currentSlideIndex === index - 1 || 
-            (index === 0 && currentSlideIndex === carouselData.length - 1)
+            (index === 0 && currentSlideIndex === imageCarouselData.length - 1)
             ) {
             slidePosition = 'slide--prev';
           }
@@ -115,7 +79,7 @@ const ImageCarousel = () => {
 
       <div className='image-carousel__dots-container'>
         <ul className='image-carousel__dots'>
-          {carouselData.map((_, index) => {
+          {imageCarouselData.map((_, index) => {
             return (
               <li 
                 className={`image-carousel__dot ${currentSlideIndex === index ? 'dot--current' : ''}`}
@@ -232,7 +196,6 @@ const Wrapper = styled.div`
   .movement-btn-prev {
     left:0;
   }
-  
 
   .movement-btn-next {
     left:100%;
@@ -313,7 +276,6 @@ const Wrapper = styled.div`
     margin-bottom:1rem;
     font-size:1.95rem;
   }
-
 }
 
 // mobile versions
@@ -336,7 +298,6 @@ const Wrapper = styled.div`
     font-weight:500;
     font-size:0.95rem;
   }
-
 }  
 
 
@@ -362,10 +323,11 @@ const Wrapper = styled.div`
       width:100%;
     }
 
-
-    
-
-
+    .movement-btn {
+      padding:0 1rem;
+      opacity:1;
+      font-size:1.5rem;
+    }
 }
 
 `
