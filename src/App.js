@@ -13,6 +13,7 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
 import Overlay from './components/Overlay'
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/checkout" element={ <Checkout/> } />
         <Route path="*" element={ <Error/> } />
       </Routes>
+      <ScrollToTop/>
       <Footer/>
     </BrowserRouter>
   );
