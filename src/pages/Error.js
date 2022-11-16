@@ -25,12 +25,20 @@ const Wrapper = styled.section`
   .error__info {
     position:absolute;
     left:50%;
-    top:25%;
-    transform:translate(-50%, -25%);
+    top:50%;
+    transform:translate(-50%, -50%) scale(1.25);
     text-align:center;
   }
   .error__heading {
     margin-bottom:2rem;
     font-weight:600;
   }
+
+
+  @media (max-width: 320px) {
+    .error__info {
+      transform:translate(-50%, -50%) scale(1);
+    }
+
+}
 `
