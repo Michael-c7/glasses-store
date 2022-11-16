@@ -9,8 +9,26 @@ import DiscountBanner from '../components/productComponents.js/DiscountBanner'
 
 
 const Products = () => {
+  const currentWidth = '80%'
+
   return (
-    <Wrapper>Products</Wrapper>
+    <Wrapper>
+      <Breadcrumb containerWidth={currentWidth}/>
+      <div className='products-outer-container'>
+        {/*filter stuff */}
+        <div className=''>
+          <CategoriesFilter/>
+          <BestSellersShowcase/>
+          <BrandedCollectionBanner/>
+        </div>
+        <div className=''>
+          <DiscountBanner/>
+          <div className='filter-bar'>filter bar</div>
+          <div className='products'>products here</div>
+        </div>
+      </div>
+
+    </Wrapper>
   )
 }
 
