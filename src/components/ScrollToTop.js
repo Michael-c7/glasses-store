@@ -4,18 +4,28 @@ import { BsChevronDoubleUp } from 'react-icons/bs'
 
 
 const ScrollToTop = () => {
-    // 1. shown when user scroll down a certain number of pixels
-    // 2. when user click on it it scrolls to the top of the page
+    const [isShown, setIsShown] = React.useState(false)
+    const getScrollAmt = _ => window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop
+
+    React.useEffect(() => {
+        const showOnScroll = _ => {
+            if(getScrollAmt() > 500) {
+                setIsShown(true)
+            } else {
+                setIsShown(false)
+            }
+        }
+        window.addEventListener("scroll", showOnScroll);
+        return () => window.removeEventListener('scroll', showOnScroll)
+    })
 
 
-
-    const [isShown, setIsShown] = React.useState(true)
-
+ 
     if(isShown) {
         return (
-            <Wrapper>
-                <BsChevronDoubleUp/>
-            </Wrapper>
+                <ScrollWrapper href='#navbar'>
+                    <BsChevronDoubleUp />
+                </ScrollWrapper>
           )
     } else {
           return <></>
@@ -26,7 +36,7 @@ const ScrollToTop = () => {
 
 export default ScrollToTop
 
-const Wrapper = styled.a`
+const ScrollWrapper = styled.a`
     position:fixed;
     background:none;
     z-index:50;
@@ -42,6 +52,7 @@ const Wrapper = styled.a`
     left:95%;
     transform:translate(-90%, -95%);
     transition:250ms ease;
+    
 
     
     @keyframes bounce {

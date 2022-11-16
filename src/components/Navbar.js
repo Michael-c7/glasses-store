@@ -17,7 +17,7 @@ const Navbar = () => {
   const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(false)
   const { openSidebar } = useProductsContext()
   return (
-    <Wrapper>
+    <Wrapper className='navbar' id='navbar'>
       <div className='navbar__container-1'>
         <div className={`navbar__searchbar ${showMobileSearchbar && 'navbar__searchbar--mobile'}`}>
           <Searchbar/>
@@ -78,6 +78,7 @@ const Wrapper = styled.nav`
   position:relative;
   text-align:center;
   padding:1.75rem 0;
+  
 
 
   .navbar__container-1 {
