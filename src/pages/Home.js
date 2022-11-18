@@ -10,7 +10,6 @@ import FeaturedCarousel from '../components/FeaturedCarousel'
 import Newsletter from '../components/Newsletter'
 
 
-
 const Home = () => {
 
   return (
@@ -23,54 +22,6 @@ const Home = () => {
       <Banner2/>
       <FeaturedCarousel/>
       <Newsletter/>
-
-      {/* <p style={{fontSize:'2vw'}}>
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-        loremloremloremloremloremloremloremlorem
-      </p> */}
     </>
   )
 }
