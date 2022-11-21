@@ -4,21 +4,20 @@ import { AiOutlineDoubleRight } from 'react-icons/ai'
 import { Link, useLocation } from 'react-router-dom'
 
 
-const Breadcrumb = (props) => {
+const Breadcrumb = () => {
   const sampleLocation = useLocation();
   let currentLocation = sampleLocation.pathname.slice(1)
-  const { containerWidth } = props
 
   return (
     <Wrapper>
-      <div className='breadcrumbs__inner-container' style={{width:`${containerWidth || '100%'}`}}>
+      <div className='breadcrumbs__inner-container'>
         <h2 className='breadcrumb__heading'>{currentLocation}</h2>
         <div className='breadcrumb__links'>
-          <Link className='breadcrumb__link' to='/'>Home</Link>
+          <Link className='breadcrumb__text' to='/'>Home</Link>
           <div className='breadcrumb__icon'>
             <AiOutlineDoubleRight/>
           </div>
-          <Link className='breadcrumb__link breadcrumb__link--current' to='/'>{currentLocation}</Link>
+          <div className='breadcrumb__text breadcrumb__text--current' to='/'>{currentLocation}</div>
         </div>
       </div>
     </Wrapper>
@@ -35,7 +34,7 @@ const Wrapper = styled.section`
     display:flex;
     justify-content:space-between;
     align-items:center;
-    width:auto;
+    width:var(--site-outer-width);
     margin:0 auto;
   }
 
@@ -54,16 +53,16 @@ const Wrapper = styled.section`
     align-items:center;  
   }
 
-  .breadcrumb__link {
+  .breadcrumb__text {
     margin:0 0.5rem;
     transition:50ms ease;
   }
 
-  .breadcrumb__link:hover {
+  .breadcrumb__text:hover {
     color:var(--red);
   }
 
-  .breadcrumb__link:first-letter {
+  .breadcrumb__text:first-letter {
     text-transform:uppercase;
   }
 
@@ -74,7 +73,7 @@ const Wrapper = styled.section`
     font-size:0.8rem;
   }
 
-  .breadcrumb__link--current {
+  .breadcrumb__text--current {
     color:var(--red);
     margin-top:2px;
   }
