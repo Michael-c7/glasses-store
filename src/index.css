@@ -23,6 +23,8 @@
 
   scroll-behavior: smooth;
 
+  --site-outer-margin:15rem;
+  --site-outer-width:calc(100% - (var(--site-outer-margin) * 2));
   
 }
 
@@ -57,7 +59,7 @@ a {
   text-decoration: none;
 }
 
-button, input {
+button, input, select {
   font-family:var(--base-font-stack);
 }
 
@@ -69,3 +71,17 @@ button, input {
   left:50%;
 }
 
+
+
+
+@media only screen and (max-width: 1440px) {
+  body {
+    --site-outer-margin:5rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  body {
+    --site-outer-margin:1rem;
+  }
+}
