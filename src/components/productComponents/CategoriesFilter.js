@@ -4,30 +4,35 @@ import Accordion from './Accordion'
 import Checkbox from './Checkbox'
 import MultiRangeSlider from './MultiRangeSlider'
 import { useFilterContext } from '../../contexts/filter_context'
+import { MdClose } from 'react-icons/md'
+
 
 const CategoriesFilter = () => {
 	// const { products } from '../'
-	const { getProductAttribute } = useFilterContext()
-
+	const { 
+		getUniqueProductValues,
+		isMobileFilterOpen,
+		closeMobileFilterMenu,
+	} = useFilterContext() 
 
 
 	const filterCategoryData = [
         {
           type:'Gender',
-          data:getProductAttribute('gender', 'single'),
+          data:getUniqueProductValues('gender', 'single'),
         },
         {
           type:'Brand',
-          data:getProductAttribute('brand', 'single'),
+          data:getUniqueProductValues('brand', 'single'),
         },
     
         {
           type:'Materials',
-          data:getProductAttribute('materials', 'single'),
+          data:getUniqueProductValues('materials', 'single'),
         },
         {
           type:'Color',
-          data:getProductAttribute('colors', 'multi'),
+          data:getUniqueProductValues('colors', 'multi'),
         },
     ]
 
@@ -35,8 +40,12 @@ const CategoriesFilter = () => {
     <Wrapper>
 		<header className='categoriesFilter__header'>
 			<h2>Categories</h2>
+			{isMobileFilterOpen ? (
+				<button className='categoriesFilter__close-menu' onClick={closeMobileFilterMenu}>
+					<MdClose/>
+				</button> 
+			): ''}
 		</header>
-
 
 		<input className='categoriesFilter__search' placeholder='Search'/>
 
@@ -45,7 +54,9 @@ const CategoriesFilter = () => {
 				return (
 					<li key={index}>
 						<Accordion data={{ accordionHeading:`${el.type}`, accordionIndex:`${index}` }}>
-							<Checkbox {...{checkboxData:filterCategoryData[index], type:`${el.type.toLowerCase() === 'color' ? 'color' : 'standard'}`}}/>
+							<div className='categoriesFilter__input-container'>
+								<Checkbox {...{checkboxData:filterCategoryData[index], type:`${el.type.toLowerCase() === 'color' ? 'color' : 'standard'}`}}/>
+							</div>
 						</Accordion>
 					</li>
 				)
@@ -55,17 +66,15 @@ const CategoriesFilter = () => {
 		<div className='categoriesFilter__categories'>
 			{/*Price*/}
 			<Accordion data={{ accordionHeading:'Price', accordionIndex:999}}>
-				<MultiRangeSlider 
-				min={0}
-				max={1000}
-				onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
-				/>
+				<div className='categoriesFilter__input-container'>
+					<MultiRangeSlider 
+					min={0}
+					max={1000}
+					onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+					/>
+				</div>
 			</Accordion>
 		</div>
-
-
-		
-
 
 		<button className='clear-filters-btn'>clear all filters</button>
     </Wrapper>
@@ -76,14 +85,36 @@ export default CategoriesFilter
 
 const Wrapper = styled.section`
 
+	.categoriesFilter__header {
+		display:flex;
+		justify-content:space-between;
+		align-items:center;
+		padding:1rem 0.5rem;
+	}
+
+	.categoriesFilter__close-menu {
+		position:relative;
+		border:none;
+		background:var(--red);
+		color:#fff;
+		border-radius:2px;
+		width:25px;
+		height:25px;
+		font-size:1.5rem;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		margin-top:-3px;
+	}
 
 
 	.categoriesFilter__categories {
 		margin:0 0.5rem;
 	}
 
-
-
+	.categoriesFilter__input-container {
+		margin:0 0.75rem;
+	}
 
 	.categoriesFilter__search {
 		border:none;
@@ -92,7 +123,6 @@ const Wrapper = styled.section`
 		padding:0.5rem;
 		margin:2rem 0.5rem 2rem 0.5rem;
 	}
-
 
 	.clear-filters-btn {
 		margin:0 0.5rem;
@@ -107,5 +137,4 @@ const Wrapper = styled.section`
 	.clear-filters-btn:hover {
 		cursor:pointer;
 	}
-
 `
