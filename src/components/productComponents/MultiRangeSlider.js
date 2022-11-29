@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
+import { useFilterContext } from '../../contexts/filter_context';
 
 
-const MultiRangeSlider = ({ min, max, onChange }) => {
+const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalArgs}) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(null);
@@ -44,8 +45,8 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
 
   // Get min and max values when their state changes
   useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
+    actionOnChange({ min: minVal, max: maxVal }, ...actionOnChangeAdditionalArgs)
+  }, [minVal, maxVal]);
 
   return (
     <Wrapper>
@@ -91,7 +92,6 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
 MultiRangeSlider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired
 };
 
 export default MultiRangeSlider;
