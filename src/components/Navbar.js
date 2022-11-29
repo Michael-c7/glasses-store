@@ -86,7 +86,7 @@ const Wrapper = styled.nav`
     display:grid;
     grid-template-columns:1fr 1fr 1fr;
     align-items:center;
-    margin:0 15rem;
+    margin: 0 var(--site-outer-margin);
   }
   
 
@@ -173,17 +173,6 @@ const Wrapper = styled.nav`
 
 
 // mobile views
-  @media only screen and (max-width: 1440px) {
-    .navbar__container-1 {
-      margin:0 5rem;
-    }
-
-    @media only screen and (max-width: 1024px) {
-      .navbar__container-1 {
-        margin:0 1rem;
-      }
-
-
     @media only screen and (max-width: 768px) {
         .navbar__mobile__container-1 {
           display:flex;
