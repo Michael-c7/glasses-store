@@ -35,7 +35,7 @@ const Footer = () => {
             <li className='footer__item'>
               <div className='footer__contact-title'>Email: </div>
               <span className='footer__item-details'>
-                <a className='footer__item-link' href='mailto:GlassesStore@aol.com'>GlassesStore@aol.com</a>
+                <a className='footer__item-link' href='mailto:Retna@aol.com'>Retna@aol.com</a>
               </span>
             </li>
           </ul>
@@ -120,7 +120,7 @@ const Footer = () => {
         </div>
       </div>
       <div className='footer__copyright-container'>
-        <p className='footer__copyright-text'>Glasses Store © {new Date().getFullYear()}</p>
+        <p className='footer__copyright-text'>RETNA © {new Date().getFullYear()}</p>
       </div>
     </Wrapper>
   )
