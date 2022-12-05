@@ -15,8 +15,24 @@ import { useFilterContext } from '../contexts/filter_context'
 
 const Products = () => {  
   const { products } = useProductsContext()
-  const { isMobileFilterOpen } = useFilterContext()  
+  const { 
+    isMobileFilterOpen,
+    categoryFilters,
+    categoryFilterFunctionality,
+    filteredProducts
+  } = useFilterContext()
 
+  const {
+    isProductsLoading
+  } = useProductsContext()
+
+  
+  
+  React.useEffect(() => {
+    categoryFilterFunctionality()
+  },[categoryFilters])
+
+  let x = false
   return (
     <Wrapper>
       <Breadcrumb/>
@@ -28,16 +44,18 @@ const Products = () => {
         {/*products stuff */}
         <div className='products__products-outer-container'>
           <FilterProductsBar/>
-          {products ? (
+          {products && !isProductsLoading ? (
             <ul className='products'>
-              {products.map((product, index) => {
+              {filteredProducts.map((product, index) => {
                 return (
                   <ProductCard product={product} key={index}/>
                 )
               })}
             </ul>
           ) : <Loading/>}
-          <Pagination/>
+          {!isProductsLoading && filteredProducts.length === 0 ? <h2 className='text-center'>No results found.</h2> : ''}
+          {filteredProducts.length !== 0 ? <Pagination/> : ''}
+          
         </div>
       </div>
     </Wrapper>
@@ -56,7 +74,7 @@ const Wrapper = styled.section`
     gap:2rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 870px) {
     .products__filter-outer-container {
       display:none;
     }
@@ -76,11 +94,33 @@ const Wrapper = styled.section`
     width:calc(100% - 2rem);
     margin:0 auto;
     left:1rem;
-    box-shadow:0 0 0.75rem #777;
+    box-shadow:0 0 1rem 0.25rem rgba(100,100,100,0.35);
     padding:2rem 1rem;
   }
 
   .products__filter-outer-container--mobile > * {
     width:100%;
+  }
+
+
+
+  .products {
+    --products-shown-amt:3;
+    display:grid;
+    grid-template-columns:repeat(var(--products-shown-amt), 1fr);
+    gap:1rem;
+  }
+
+
+  @media (max-width: 1024px) {
+    .products {
+      --products-shown-amt:2;
+    }
+  }
+
+  @media (max-width:425px) {
+    .products {
+      --products-shown-amt:1;
+    }
   }
 `
