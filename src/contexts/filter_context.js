@@ -4,6 +4,10 @@ import reducer from '../reducers/filter_reducer'
 import {
   MOBILE_FILTER_MENU_OPEN,
   MOBILE_FILTER_MENU_CLOSE,
+  CATEGORY_FILTERS,
+  SORT_FILTERS,
+  UPDATE_CATEGORY_FILTERS,
+  SET_FILTERED_PRODUCTS,
 } from '../actions'
 
 import { useProductsContext } from '../contexts/products_context'
@@ -11,14 +15,19 @@ import { useProductsContext } from '../contexts/products_context'
 const initialState = {
   isMobileFilterOpen:false,
   filteredProducts:[],
-  filterCategories:{
+  categoryFilters:{
     searchTerm:'',
     gender:[],
     brand:[],
     materials:[],
     color:[],
-    price:[],
-  }
+    price:{min:0, max:0},
+  },
+  sortFilters:{
+    sortBy:'default',
+    amountToShow:'9',
+  },
+  
 }
 
 const FilterContext = React.createContext()
@@ -68,9 +77,29 @@ export const FilterProvider = ({ children }) => {
     }
 
 
-    // React.useEffect(() => {
-    //   console.log(products)
-    // })
+    const updateCategoryFilters = (filterValue,filterName) => {
+      dispatch({
+         type: UPDATE_CATEGORY_FILTERS,
+         payload:{filterValue, filterName},
+      })
+
+    }
+
+
+    const categoryFilterFunctionality = unfilteredProducts => {
+      dispatch({ type: CATEGORY_FILTERS, payload:products })
+    }
+
+    const sortFilterFunctionality = _ => {
+      dispatch({ type: SORT_FILTERS })
+    }
+
+
+    React.useEffect(() => {
+      dispatch({type:SET_FILTERED_PRODUCTS, payload:products})
+    },[products])
+
+
 
     return (
         <FilterContext.Provider
@@ -79,6 +108,9 @@ export const FilterProvider = ({ children }) => {
             getUniqueProductValues,
             openMobileFilterMenu,
             closeMobileFilterMenu,
+            categoryFilterFunctionality,
+            sortFilterFunctionality,
+            updateCategoryFilters,
           }}
         >
           {children}
