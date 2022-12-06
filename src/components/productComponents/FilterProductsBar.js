@@ -8,7 +8,7 @@ import SortDropdown from './SortDropdown'
 
 import { useFilterContext } from '../../contexts/filter_context'
 const FilterProductsBar = () => {
-    const { openMobileFilterMenu, closeMobileFilterMenu, isMobileFilterOpen} = useFilterContext()
+    const { openMobileFilterMenu, closeMobileFilterMenu, isMobileFilterOpen } = useFilterContext()
 
     const productSortOptions = {
         /*sortName is used for the label text,
@@ -56,6 +56,10 @@ const FilterProductsBar = () => {
         sortValue:'sort-amount',
         optionValues:[
             {
+                value:'4',
+                text:'4',
+            },
+            {
                 value:'9',
                 text:'9',
             },
@@ -70,10 +74,6 @@ const FilterProductsBar = () => {
             {
                 value:'50',
                 text:'50',
-            },
-            {
-                value:'75',
-                text:'75',
             },
             {
                 value:'100',
@@ -164,7 +164,7 @@ const Wrapper = styled.section`
         margin-left:1rem;
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 870px) {
         justify-content:center;
         flex-direction:column;
 
