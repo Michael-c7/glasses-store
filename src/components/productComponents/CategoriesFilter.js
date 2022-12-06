@@ -5,14 +5,14 @@ import Checkbox from './Checkbox'
 import MultiRangeSlider from './MultiRangeSlider'
 import { useFilterContext } from '../../contexts/filter_context'
 import { MdClose } from 'react-icons/md'
-
+import { generateUniqueId } from '../../utility/misc'
 
 const CategoriesFilter = () => {
-	// const { products } from '../'
 	const { 
 		getUniqueProductValues,
 		isMobileFilterOpen,
 		closeMobileFilterMenu,
+		updateCategoryFilters,
 	} = useFilterContext() 
 
 
@@ -36,6 +36,11 @@ const CategoriesFilter = () => {
         },
     ]
 
+
+
+
+
+
   return (
     <Wrapper>
 		<header className='categoriesFilter__header'>
@@ -47,13 +52,13 @@ const CategoriesFilter = () => {
 			): ''}
 		</header>
 
-		<input className='categoriesFilter__search' placeholder='Search'/>
+		<input className='categoriesFilter__search' placeholder='Search' onChange={(e) => updateCategoryFilters(e.target.value, 'searchTerm') }/>
 
 		<ul className='categoriesFilter__categories'>
 			{filterCategoryData.map((el, index) => {
 				return (
 					<li key={index}>
-						<Accordion data={{ accordionHeading:`${el.type}`, accordionIndex:`${index}` }}>
+						<Accordion data={{ accordionHeading:`${el.type}`, accordionIndex:generateUniqueId() }}>
 							<div className='categoriesFilter__input-container'>
 								<Checkbox {...{checkboxData:filterCategoryData[index], type:`${el.type.toLowerCase() === 'color' ? 'color' : 'standard'}`}}/>
 							</div>
@@ -65,12 +70,13 @@ const CategoriesFilter = () => {
 
 		<div className='categoriesFilter__categories'>
 			{/*Price*/}
-			<Accordion data={{ accordionHeading:'Price', accordionIndex:999}}>
+			<Accordion data={{ accordionHeading:'Price', accordionIndex:generateUniqueId()}}>
 				<div className='categoriesFilter__input-container'>
 					<MultiRangeSlider 
 					min={0}
-					max={1000}
-					onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+					max={250}
+					actionOnChange={updateCategoryFilters}
+					actionOnChangeAdditionalArgs={['price']}
 					/>
 				</div>
 			</Accordion>
@@ -84,12 +90,13 @@ const CategoriesFilter = () => {
 export default CategoriesFilter
 
 const Wrapper = styled.section`
+	--indentation-spacing:0.5rem;
 
 	.categoriesFilter__header {
 		display:flex;
 		justify-content:space-between;
 		align-items:center;
-		padding:1rem 0.5rem;
+		padding:1rem 0rem;
 	}
 
 	.categoriesFilter__close-menu {
@@ -109,7 +116,7 @@ const Wrapper = styled.section`
 
 
 	.categoriesFilter__categories {
-		margin:0 0.5rem;
+		margin:0 var(--indentation-spacing);
 	}
 
 	.categoriesFilter__input-container {
@@ -121,11 +128,11 @@ const Wrapper = styled.section`
 		background:#f7f7f7;
 		font-size:1.15rem;
 		padding:0.5rem;
-		margin:2rem 0.5rem 2rem 0.5rem;
+		margin:2rem  var(--indentation-spacing) 2rem  var(--indentation-spacing);
 	}
 
 	.clear-filters-btn {
-		margin:0 0.5rem;
+		margin:0 var(--indentation-spacing);
 		border:none;
 		padding:0.5rem 0.5rem;
 		font-size:1.15rem;
