@@ -34,8 +34,7 @@ const Wrapper = styled.section`
     display:flex;
     justify-content:space-between;
     align-items:center;
-    width:var(--site-outer-width);
-    margin:0 auto;
+    margin:0 var(--site-outer-margin);
   }
 
   .breadcrumb__heading {
