@@ -13,14 +13,27 @@ const CategoriesFilter = () => {
 		isMobileFilterOpen,
 		closeMobileFilterMenu,
 		updateCategoryFilters,
+		clearFilters,
+		highestPricedProductAmt,
 	} = useFilterContext() 
 
 
+
 	const filterCategoryData = [
-        {
-          type:'Gender',
-          data:getUniqueProductValues('gender', 'single'),
-        },
+		/*the getUniqueProductValues rerendering each time,
+		which gets the items in a different order is what causes the 
+		this bug --V
+		fix the bug that happens when you select an option in
+		sort by drop it changes how the checkboxes are arranges in categories
+
+		object.freeze(), does not work,
+		should do a thing where it doesn't re-render if the length
+		of the array is the same is it used to be
+		*/
+		{
+			type:'Gender',
+			data:Object.freeze(getUniqueProductValues('gender', 'single')),
+		},
         {
           type:'Brand',
           data:getUniqueProductValues('brand', 'single'),
@@ -37,10 +50,6 @@ const CategoriesFilter = () => {
     ]
 
 
-
-
-
-
   return (
     <Wrapper>
 		<header className='categoriesFilter__header'>
@@ -52,7 +61,7 @@ const CategoriesFilter = () => {
 			): ''}
 		</header>
 
-		<input className='categoriesFilter__search' placeholder='Search' onChange={(e) => updateCategoryFilters(e.target.value, 'searchTerm') }/>
+		<input className='categoriesFilter__search' id='filter-searchbar' placeholder='Search' onChange={(e) => updateCategoryFilters(e.target.value, 'searchTerm') }/>
 
 		<ul className='categoriesFilter__categories'>
 			{filterCategoryData.map((el, index) => {
@@ -82,7 +91,7 @@ const CategoriesFilter = () => {
 			</Accordion>
 		</div>
 
-		<button className='clear-filters-btn'>clear all filters</button>
+		<button className='clear-filters-btn' onClick={() => clearFilters()}>clear all filters</button>
     </Wrapper>
   )
 }
