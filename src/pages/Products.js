@@ -19,12 +19,18 @@ const Products = () => {
     isMobileFilterOpen,
     categoryFilters,
     categoryFilterFunctionality,
-    filteredProducts
+    filteredProducts,
+    sortFilters,
+    sortFilterFunctionality,
   } = useFilterContext()
 
   const {
     isProductsLoading
   } = useProductsContext()
+
+
+
+  let [productsCopy, setProductsCopy] = React.useState([])
 
   
   
@@ -32,7 +38,17 @@ const Products = () => {
     categoryFilterFunctionality()
   },[categoryFilters])
 
-  let x = false
+
+  React.useEffect(() => {
+    setProductsCopy(JSON.parse(JSON.stringify(products)))
+  },[products])
+
+
+  React.useEffect(() => {
+    sortFilterFunctionality(productsCopy)
+  },[sortFilters])
+  
+
   return (
     <Wrapper>
       <Breadcrumb/>
@@ -54,7 +70,7 @@ const Products = () => {
             </ul>
           ) : <Loading/>}
           {!isProductsLoading && filteredProducts.length === 0 ? <h2 className='text-center'>No results found.</h2> : ''}
-          {filteredProducts.length !== 0 ? <Pagination/> : ''}
+          {/* {filteredProducts.length !== 0 ? <Pagination/> : ''} */}
           
         </div>
       </div>

@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
-import { useFilterContext } from '../../contexts/filter_context';
 
 
 const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalArgs}) => {
@@ -11,6 +10,8 @@ const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalA
   const minValRef = useRef(null);
   const maxValRef = useRef(null);
   const range = useRef(null);
+
+
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -48,9 +49,13 @@ const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalA
     actionOnChange({ min: minVal, max: maxVal }, ...actionOnChangeAdditionalArgs)
   }, [minVal, maxVal]);
 
+
+
+
   return (
     <Wrapper>
       <input
+        id='multiRangeSlider-min-price'
         type='range'
         min={min}
         max={max}
@@ -58,7 +63,9 @@ const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalA
         ref={minValRef}
         onChange={(event) => {
           const value = Math.min(+event.target.value, maxVal - 1);
-          setMinVal(value);
+          // using setTimeout to redirect the useState variables to the callback queue.
+          setTimeout(() => setMinVal(value), 0);
+          // setMinVal(value);
           event.target.value = value.toString();
         }}
         className={classnames('thumb thumb--zindex-3', {
@@ -66,6 +73,7 @@ const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalA
         })}
       />
       <input
+        id='multiRangeSlider-max-price'
         type='range'
         min={min}
         max={max}
@@ -73,7 +81,9 @@ const MultiRangeSlider = ({ min, max , actionOnChange, actionOnChangeAdditionalA
         ref={maxValRef}
         onChange={(event) => {
           const value = Math.max(+event.target.value, minVal + 1);
-          setMaxVal(value);
+          // using setTimeout to redirect the useState variables to the callback queue.
+          setTimeout(() => setMaxVal(value), 0);
+          // setMaxVal(value);
           event.target.value = value.toString();
         }}
         className='thumb thumb--zindex-4'
