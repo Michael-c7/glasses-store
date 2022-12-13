@@ -1,11 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { useFilterContext } from '../../contexts/filter_context'
 
 
 const Checkbox = (props) => {
+    const { updateCategoryFilters, categoryFilters } = useFilterContext()
     const { checkboxData, type} = props
-    // console.log(props.checkboxData.data)
+    const [isCheckedInfo, setIsCheckedInfo] = React.useState({condition:false, value:''})
 
+
+  React.useEffect(() => {
+    let categoryFilterArray = categoryFilters[checkboxData.type.toLowerCase()]
+    if(isCheckedInfo.condition) {      
+      updateCategoryFilters([...categoryFilterArray,isCheckedInfo.value], checkboxData.type.toLowerCase())
+    } else {
+      if(isCheckedInfo.value && categoryFilterArray.includes(isCheckedInfo.value)) {
+        updateCategoryFilters(categoryFilterArray.filter((el) => el !== isCheckedInfo.value), checkboxData.type.toLowerCase())
+      }
+    }
+
+  }, [isCheckedInfo])
+
+
+  /*the standard checkbox for most things */
     if(type === 'standard') {
         return (
             <WrapperStandard>      
@@ -13,7 +30,7 @@ const Checkbox = (props) => {
                     return (
                       <li className='checkbox-item' key={index}>
                         <label className='box'>{item}
-                          <input type='checkbox'/>
+                          <input type='checkbox' id='checkbox-input' onChange={(e) => setIsCheckedInfo({condition:e.target.checked, value:item})}/>
                           <span className='mark'></span>
                         </label>
                       </li>
@@ -21,6 +38,7 @@ const Checkbox = (props) => {
                 })}
             </WrapperStandard>
           )
+  /*the checkbox for color */
     } else if(type === 'color') {
         return (
             <WrapperColor>
@@ -28,7 +46,7 @@ const Checkbox = (props) => {
                     return (
                         <li className='checkbox-item' key={index}>
                         <label className='box'>{item}
-                            <input type='checkbox'/>
+                            <input type='checkbox' id='checkbox-input' onChange={(e) => setIsCheckedInfo({condition:e.target.checked, value:item})}/>
                             <span className='mark' style={{backgroundColor:item}}></span>
                         </label>
                         </li>
