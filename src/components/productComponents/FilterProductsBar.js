@@ -8,7 +8,13 @@ import SortDropdown from './SortDropdown'
 
 import { useFilterContext } from '../../contexts/filter_context'
 const FilterProductsBar = () => {
-    const { openMobileFilterMenu, closeMobileFilterMenu, isMobileFilterOpen } = useFilterContext()
+    const { 
+        openMobileFilterMenu,
+        closeMobileFilterMenu,
+        isMobileFilterOpen,
+        sortFilterFunctionality,
+        updateSortFilters,
+    } = useFilterContext()
 
     const productSortOptions = {
         /*sortName is used for the label text,
@@ -48,39 +54,35 @@ const FilterProductsBar = () => {
         ]
     }
 
-    const productSortAmount = {
-        /*sortName is used for the label text,
-        sortValue is for the for, name and id attributes
-        on the label and select */
-        sortName:'show',
-        sortValue:'sort-amount',
-        optionValues:[
-            {
-                value:'4',
-                text:'4',
-            },
-            {
-                value:'9',
-                text:'9',
-            },
-            {
-                value:'18',
-                text:'18',
-            },
-            {
-                value:'25',
-                text:'25',
-            },
-            {
-                value:'50',
-                text:'50',
-            },
-            {
-                value:'100',
-                text:'100',
-            },
-        ]
-    }
+    // const productSortAmount = {
+    //     /*sortName is used for the label text,
+    //     sortValue is for the for, name and id attributes
+    //     on the label and select */
+    //     sortName:'show',
+    //     sortValue:'sort-amount',
+    //     optionValues:[
+    //         {
+    //             value:'9',
+    //             text:'9',
+    //         },
+    //         {
+    //             value:'18',
+    //             text:'18',
+    //         },
+    //         {
+    //             value:'25',
+    //             text:'25',
+    //         },
+    //         {
+    //             value:'50',
+    //             text:'50',
+    //         },
+    //         {
+    //             value:'100',
+    //             text:'100',
+    //         },
+    //     ]
+    // }
 
 
   return (
@@ -101,8 +103,8 @@ const FilterProductsBar = () => {
             </div>
         </>
         <div className='filterProductsBar__sort-outer-container'>
-            <SortDropdown sortOptions={productSortOptions}/>
-            <SortDropdown sortOptions={productSortAmount}/>
+            <SortDropdown sortOptions={productSortOptions} stateToUpdate={updateSortFilters} sortName={'sortBy'}/>
+            {/* <SortDropdown sortOptions={productSortAmount} stateToUpdate={updateSortFilters} sortName={'amountToShow'}/> */}
         </div>
     </Wrapper>
   )
