@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SortDropdown = ({ sortOptions }) => {
+const SortDropdown = ({ sortOptions, stateToUpdate, sortName }) => {
   const [sortValue, setSortValue] = React.useState('')
+
+  
   
   React.useEffect(() => {
-    console.log(sortValue)
+    if(stateToUpdate) {
+      stateToUpdate(sortValue, sortName)
+    }
   }, [sortValue])
 
   return (
