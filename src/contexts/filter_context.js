@@ -8,6 +8,9 @@ import {
   SORT_FILTERS,
   UPDATE_CATEGORY_FILTERS,
   SET_FILTERED_PRODUCTS,
+  UPDATE_SORT_FILTERS,
+  CLEAR_FILTERS,
+  GET_HIGHEST_PRICED_PRODUCT_AMT,
 } from '../actions'
 
 import { useProductsContext } from '../contexts/products_context'
@@ -15,6 +18,7 @@ import { useProductsContext } from '../contexts/products_context'
 const initialState = {
   isMobileFilterOpen:false,
   filteredProducts:[],
+  highestPricedProductAmt:0,
   categoryFilters:{
     searchTerm:'',
     gender:[],
@@ -24,8 +28,8 @@ const initialState = {
     price:{min:0, max:0},
   },
   sortFilters:{
-    sortBy:'default',
-    amountToShow:'9',
+    sortBy:'',
+    amountToShow:'',
   },
   
 }
@@ -82,7 +86,10 @@ export const FilterProvider = ({ children }) => {
          type: UPDATE_CATEGORY_FILTERS,
          payload:{filterValue, filterName},
       })
+    }
 
+    const setFiltersProduct = _ => {
+      dispatch({type:SET_FILTERED_PRODUCTS, payload:products})
     }
 
 
@@ -90,14 +97,39 @@ export const FilterProvider = ({ children }) => {
       dispatch({ type: CATEGORY_FILTERS, payload:products })
     }
 
-    const sortFilterFunctionality = _ => {
-      dispatch({ type: SORT_FILTERS })
+
+    const updateSortFilters = (sortValue, sortName) => {
+      dispatch({ type: UPDATE_SORT_FILTERS, payload:{sortValue, sortName} })
     }
 
 
+    const sortFilterFunctionality = (products) => {
+      dispatch({ type: SORT_FILTERS, payload:products })
+    }
+
+
+    const GetHighestPricedProductAmt = products => {
+      dispatch({ type: GET_HIGHEST_PRICED_PRODUCT_AMT, payload:products })
+    }
+
+
+    const clearFilters = _ => {
+      dispatch({ type:CLEAR_FILTERS })
+    }
+
+
+
+
+
+
+
     React.useEffect(() => {
-      dispatch({type:SET_FILTERED_PRODUCTS, payload:products})
+      setFiltersProduct()
+
+      GetHighestPricedProductAmt(products)
     },[products])
+
+    
 
 
 
@@ -111,6 +143,8 @@ export const FilterProvider = ({ children }) => {
             categoryFilterFunctionality,
             sortFilterFunctionality,
             updateCategoryFilters,
+            updateSortFilters,
+            clearFilters,
           }}
         >
           {children}
