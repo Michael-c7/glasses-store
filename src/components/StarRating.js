@@ -14,7 +14,7 @@ const StarRating = (props) => {
         <Wrapper>
         {Array.from({ length: 5 }, (v, i) => (
             <li className='star' key={i}>
-                {rating >= i ? <BsStarFill/> : <BsStar/>}   
+                {rating > i ? <BsStarFill/> : <BsStar/>}   
             </li>
         ))}
         </Wrapper>
