@@ -4,21 +4,16 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 
 
 const StarRating = (props) => {
-
-    const [rating, setRating] = React.useState(
-        typeof props.rating == "number" ? props.rating : 0
-    );
-    
-      
     return (
         <Wrapper>
         {Array.from({ length: 5 }, (v, i) => (
             <li className='star' key={i}>
-                {rating > i ? <BsStarFill/> : <BsStar/>}   
+                {props?.rating > i ? <BsStarFill/> : <BsStar/>}   
             </li>
         ))}
         </Wrapper>
     );
+
 }
 
 export default StarRating
