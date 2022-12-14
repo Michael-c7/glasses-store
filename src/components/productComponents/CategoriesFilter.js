@@ -6,6 +6,7 @@ import MultiRangeSlider from './MultiRangeSlider'
 import { useFilterContext } from '../../contexts/filter_context'
 import { MdClose } from 'react-icons/md'
 import { generateUniqueId } from '../../utility/misc'
+import { useProductsContext } from '../../contexts/products_context'
 
 const CategoriesFilter = () => {
 	const { 
@@ -15,40 +16,41 @@ const CategoriesFilter = () => {
 		updateCategoryFilters,
 		clearFilters,
 		highestPricedProductAmt,
+		filteredProducts,
 	} = useFilterContext() 
 
+	const {
+		products,
+	} = useProductsContext()
 
 
-	const filterCategoryData = [
-		/*the getUniqueProductValues rerendering each time,
-		which gets the items in a different order is what causes the 
-		this bug --V
-		fix the bug that happens when you select an option in
-		sort by drop it changes how the checkboxes are arranges in categories
 
-		object.freeze(), does not work,
-		should do a thing where it doesn't re-render if the length
-		of the array is the same is it used to be
-		*/
-		{
-			type:'Gender',
-			data:Object.freeze(getUniqueProductValues('gender', 'single')),
-		},
-        {
-          type:'Brand',
-          data:getUniqueProductValues('brand', 'single'),
-        },
-    
-        {
-          type:'Materials',
-          data:getUniqueProductValues('materials', 'single'),
-        },
-        {
-          type:'Color',
-          data:getUniqueProductValues('colors', 'multi'),
-        },
-    ]
 
+	const [filterCategoryData, setDataCategories] = React.useState([])
+
+	React.useEffect(() => {
+		setDataCategories(
+			[
+				{
+					type:'Gender',
+					data:getUniqueProductValues('gender', 'single'),
+				},
+				{
+				type:'Brand',
+				data:getUniqueProductValues('brand', 'single'),
+				},
+			
+				{
+				type:'Materials',
+				data:getUniqueProductValues('materials', 'single'),
+				},
+				{
+				type:'Color',
+				data:getUniqueProductValues('colors', 'multi'),
+				},
+			]
+		)
+	}, [products])
 
   return (
     <Wrapper>
