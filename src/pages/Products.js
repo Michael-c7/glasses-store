@@ -31,7 +31,8 @@ const Products = () => {
 
 
 
-  let [productsCopy, setProductsCopy] = React.useState([])  
+  let [productsCopy, setProductsCopy] = React.useState([])
+  let [isLoading, setIsLoading] = React.useState(true)
   
   React.useEffect(() => {
     categoryFilterFunctionality()
@@ -49,10 +50,25 @@ const Products = () => {
   },[sortFilters])
 
 
-
   React.useEffect(() => {
-    setFiltersProduct(products)
+    if(!products || isProductsLoading) {
+      setIsLoading(true)
+    } else {
+      setIsLoading(false)
+    }
+  },[products, isProductsLoading ])
+
+
+    React.useEffect(() => {
+      setIsLoading(true)
+      setTimeout(() => {
+        setFiltersProduct(products)
+        setIsLoading(false)
+      }, 1000)
   }, [products])
+
+
+
   
 
   return (
@@ -66,7 +82,7 @@ const Products = () => {
         {/*products stuff */}
         <div className='products__products-outer-container'>
           <FilterProductsBar/>
-          {products && !isProductsLoading ? (
+          {isLoading ? <Loading/> : (
             <ul className='products'>
               {filteredProducts?.map((product, index) => {
                 return (
@@ -74,12 +90,8 @@ const Products = () => {
                 )
               })}
             </ul>
-          ) : <Loading/>}
-          {!isProductsLoading && filteredProducts.length === 0 ? <h2 className='text-center'>No results found.</h2> : ''}
-          
-          
-          
-          
+          )}
+          {!isLoading && filteredProducts.length === 0 ? <h2 className='text-center'>No results found.</h2> : ''}
           {/* {filteredProducts.length !== 0 ? <Pagination/> : ''} */}
           
         </div>

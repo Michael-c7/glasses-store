@@ -115,7 +115,8 @@ export const FilterProvider = ({ children }) => {
 
     const clearFilters = _ => {
       dispatch({ type:CLEAR_FILTERS })
-    }  
+    }
+  
     
 
 
