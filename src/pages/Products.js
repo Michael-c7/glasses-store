@@ -22,6 +22,7 @@ const Products = () => {
     filteredProducts,
     sortFilters,
     sortFilterFunctionality,
+    setFiltersProduct,
   } = useFilterContext()
 
   const {
@@ -30,9 +31,7 @@ const Products = () => {
 
 
 
-  let [productsCopy, setProductsCopy] = React.useState([])
-
-  
+  let [productsCopy, setProductsCopy] = React.useState([])  
   
   React.useEffect(() => {
     categoryFilterFunctionality()
@@ -40,6 +39,7 @@ const Products = () => {
 
 
   React.useEffect(() => {
+    // only want to get the first render of the products for the default sort by option
     setProductsCopy(JSON.parse(JSON.stringify(products)))
   },[products])
 
@@ -47,6 +47,12 @@ const Products = () => {
   React.useEffect(() => {
     sortFilterFunctionality(productsCopy)
   },[sortFilters])
+
+
+
+  React.useEffect(() => {
+    setFiltersProduct(products)
+  }, [products])
   
 
   return (
@@ -62,7 +68,7 @@ const Products = () => {
           <FilterProductsBar/>
           {products && !isProductsLoading ? (
             <ul className='products'>
-              {filteredProducts.map((product, index) => {
+              {filteredProducts?.map((product, index) => {
                 return (
                   <ProductCard product={product} key={index}/>
                 )
@@ -70,6 +76,10 @@ const Products = () => {
             </ul>
           ) : <Loading/>}
           {!isProductsLoading && filteredProducts.length === 0 ? <h2 className='text-center'>No results found.</h2> : ''}
+          
+          
+          
+          
           {/* {filteredProducts.length !== 0 ? <Pagination/> : ''} */}
           
         </div>

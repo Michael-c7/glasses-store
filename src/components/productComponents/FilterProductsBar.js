@@ -5,8 +5,9 @@ import { BsFillGrid3X2GapFill } from 'react-icons/bs'
 import { FaList } from 'react-icons/fa'
 import { FiFilter } from 'react-icons/fi'
 import SortDropdown from './SortDropdown'
-
 import { useFilterContext } from '../../contexts/filter_context'
+
+
 const FilterProductsBar = () => {
     const { 
         openMobileFilterMenu,

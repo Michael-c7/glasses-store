@@ -14,6 +14,8 @@ const ProductCard = ({product}) => {
     let fakeOriginalPrice = Math.round(fields.price * 1.6)
     let isSaleWidgetShown = false
 
+
+    
     return (
         <Wrapper>
             <Link to={`/singleProduct/${fields.productCode}`}>
@@ -23,7 +25,8 @@ const ProductCard = ({product}) => {
             </Link>
             <div className='productCard__info'>
                 <h2 className='productCard__name'>{fields.name}</h2>
-                <StarRating className='product-card__stars' rating={fields.rating}/>
+                {/* <h2>{fields?.rating}</h2> */}
+                <StarRating className='product-card__stars' rating={fields?.rating}/>
                 <p className='productCard__price'>${fields.price} {isSaleWidgetShown && <span className='original-price-text'>${fakeOriginalPrice}</span>} </p>
             </div>
         </Wrapper>

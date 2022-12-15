@@ -115,20 +115,7 @@ export const FilterProvider = ({ children }) => {
 
     const clearFilters = _ => {
       dispatch({ type:CLEAR_FILTERS })
-    }
-
-
-
-
-
-
-
-    React.useEffect(() => {
-      setFiltersProduct()
-
-      GetHighestPricedProductAmt(products)
-    },[products])
-
+    }  
     
 
 
@@ -145,6 +132,7 @@ export const FilterProvider = ({ children }) => {
             updateCategoryFilters,
             updateSortFilters,
             clearFilters,
+            setFiltersProduct,
           }}
         >
           {children}
