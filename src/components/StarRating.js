@@ -5,7 +5,7 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 
 const StarRating = (props) => {
     return (
-        <Wrapper>
+        <Wrapper horizontalSpacing={`${props.horizontalSpacing || 'center'}`}>
         {Array.from({ length: 5 }, (v, i) => (
             <li className='star' key={i}>
                 {props?.rating > i ? <BsStarFill/> : <BsStar/>}   
@@ -24,7 +24,9 @@ const Wrapper = styled.ul`
 
     display:flex;
     flex-direction:row;
-    justify-content: center;
+    // justify-content: center;
+    justify-content: ${(props) => props.horizontalSpacing};
+
 
     .star {
         margin:0.5rem 0.1rem;
