@@ -3,21 +3,48 @@ import styled from 'styled-components'
 import { AiOutlineDoubleRight } from 'react-icons/ai'
 import { Link, useLocation } from 'react-router-dom'
 
+import { generateUniqueId } from '../utility/misc'
+/*
+- currentLocation props is a string and should be the current location
+  eg: Home, Products, Login,ect...
 
-const Breadcrumb = () => {
+- customPath props is an array of items(string or number)
+  that is path that should include everything except
+  the currentLocation use the currentLocation prop for that
+*/
+const Breadcrumb = (props) => {
   const sampleLocation = useLocation();
   let currentLocation = sampleLocation.pathname.slice(1)
+
+  let [locationPath, setLocationPath] = React.useState(['Home', currentLocation])
+
+  React.useEffect(() => {
+    if(props.customPath) {
+      setLocationPath([...props.customPath, props.currentLocation || currentLocation])
+    }
+  },[props.customPath])
 
   return (
     <Wrapper>
       <div className='breadcrumbs__inner-container'>
-        <h2 className='breadcrumb__heading'>{currentLocation}</h2>
+        <h2 className='breadcrumb__heading'>{props.currentLocation || currentLocation}</h2>
         <div className='breadcrumb__links'>
-          <Link className='breadcrumb__text' to='/'>Home</Link>
-          <div className='breadcrumb__icon'>
-            <AiOutlineDoubleRight/>
-          </div>
-          <div className='breadcrumb__text breadcrumb__text--current' to='/'>{currentLocation}</div>
+          {locationPath.map((item, index) => {
+            if((index + 1) < locationPath.length) {
+              return (
+                <div className='breadcrumb__text-container' key={generateUniqueId + item + index}>
+                  <Link className='breadcrumb__text breadcrumb__link' to='/'>{item}</Link>
+                  <div className='breadcrumb__icon'>
+                    <AiOutlineDoubleRight/>
+                  </div>
+                </div>
+              )
+            } else {
+              return (
+                <span className='breadcrumb__text breadcrumb__text--current' to='/' key={generateUniqueId}>{props.currentLocation || currentLocation}</span>
+              )
+            }
+          })}
         </div>
       </div>
     </Wrapper>
@@ -55,6 +82,11 @@ const Wrapper = styled.section`
   .breadcrumb__text {
     margin:0 0.5rem;
     transition:50ms ease;
+  }
+
+
+  .breadcrumb__text-container {
+    display:flex;
   }
 
   .breadcrumb__text:hover {
