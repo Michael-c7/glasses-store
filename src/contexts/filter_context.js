@@ -11,6 +11,8 @@ import {
   UPDATE_SORT_FILTERS,
   CLEAR_FILTERS,
   GET_HIGHEST_PRICED_PRODUCT_AMT,
+  SHOW_GRID_VIEW,
+  SHOW_LIST_VIEW,
 } from '../actions'
 
 import { useProductsContext } from '../contexts/products_context'
@@ -19,6 +21,10 @@ const initialState = {
   isMobileFilterOpen:false,
   filteredProducts:[],
   highestPricedProductAmt:0,
+
+  isGridViewActive:true,
+  isListViewActive:false,
+
   categoryFilters:{
     searchTerm:'',
     gender:[],
@@ -116,9 +122,16 @@ export const FilterProvider = ({ children }) => {
     const clearFilters = _ => {
       dispatch({ type:CLEAR_FILTERS })
     }
+
+
+    const showGridView = _ => {
+      dispatch({ type:SHOW_GRID_VIEW })
+    }
   
     
-
+    const showListView = _ => {
+      dispatch({ type:SHOW_LIST_VIEW })
+    }
 
 
     return (
@@ -134,6 +147,8 @@ export const FilterProvider = ({ children }) => {
             updateSortFilters,
             clearFilters,
             setFiltersProduct,
+            showGridView,
+            showListView,
           }}
         >
           {children}

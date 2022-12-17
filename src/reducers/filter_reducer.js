@@ -9,6 +9,8 @@ import {
     UPDATE_SORT_FILTERS,
     CLEAR_FILTERS,
     GET_HIGHEST_PRICED_PRODUCT_AMT,
+    SHOW_GRID_VIEW,
+    SHOW_LIST_VIEW,
   } from '../actions'
 
 import Products from '../pages/Products'
@@ -206,6 +208,23 @@ const filter_reducer = (state, action) => {
                 color:[],
                 price:{min:0, max:250},
               },
+        }
+    }
+
+
+    if(action.type === SHOW_GRID_VIEW) {
+        return {
+            ...state,
+            isGridViewActive:true,
+            isListViewActive:false,
+        }
+    }
+
+    if(action.type === SHOW_LIST_VIEW) {
+        return {
+            ...state,
+            isGridViewActive:false,
+            isListViewActive:true,
         }
     }
 

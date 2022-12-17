@@ -15,6 +15,10 @@ const FilterProductsBar = () => {
         isMobileFilterOpen,
         sortFilterFunctionality,
         updateSortFilters,
+        showGridView,
+        showListView,
+        isGridViewActive,
+        isListViewActive,
     } = useFilterContext()
 
     const productSortOptions = {
@@ -90,17 +94,16 @@ const FilterProductsBar = () => {
     <Wrapper>
         <>
             <div className='icon-list'>
-                {/*do the mobile show hide for this filter bnt, also do the mobile and click function ability */}
                 <div className='icon-container filter-icon-container' onClick={openMobileFilterMenu}>
                     <FiFilter/>
                 </div>
 
-                <div className='icon-container grid-icon-container'>
+                <button className={`icon-container grid-icon-container ${isGridViewActive && 'icon-container--current'}`} onClick={showGridView}>
                     <BsFillGrid3X2GapFill/>
-                </div>
-                <div className='icon-container list-icon-container'>
+                </button>
+                <button className={`icon-container list-icon-container ${isListViewActive && 'icon-container--current'}`} onClick={showListView}>
                     <FaList/>
-                </div>
+                </button>
             </div>
         </>
         <div className='filterProductsBar__sort-outer-container'>
@@ -146,6 +149,7 @@ const Wrapper = styled.section`
         border:2px solid #000;
         margin:0 0.25rem;
         transition:50ms ease;
+        background:none;
     }
 
     .icon-container:hover {
@@ -154,6 +158,13 @@ const Wrapper = styled.section`
         cursor:pointer;
     }
 
+    .icon-container--current {
+        color:var(--red);
+        border:2px solid var(--red);
+        cursor:pointer;
+    }
+
+
     .filter-icon-container {
         margin-right:1rem;
         display:none;
@@ -161,6 +172,10 @@ const Wrapper = styled.section`
 
     .grid-icon-container {
         font-size:1.3rem;
+    }
+
+    .list-icon-container {
+        font-size:1rem;
     }
 
     .FilterProductsBar__sort-amt-container {
