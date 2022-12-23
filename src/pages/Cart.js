@@ -9,15 +9,37 @@ import StarRating from '../components/StarRating'
 
 import PlaceholderImage from '../assets/singleProductImagePlaceholders/sincerely-media-d05w6_7FaPM-unsplash.jpg'
 
-/*
- use this for styling tables
-https://www.w3schools.com/html/html_tables.asp
-*/
 
 import { BsArrowRepeat, BsFillXCircleFill } from 'react-icons/bs'
 
 const Cart = () => {
-  let mediaBreakpoint = 768
+
+  let [totalWidth, setTotalWidth] = React.useState(window.innerWidth)
+
+
+  const getWidth = _ => setTotalWidth(window.innerWidth)
+
+  React.useEffect(() => {
+    window.addEventListener("resize", getWidth);
+    return () => window.removeEventListener('resize',getWidth)
+  })
+
+
+  React.useEffect(() => {
+    let nonEssentialBreakpoint = 768
+    let essentialInfoEl = Array.from(document.querySelectorAll('.cart__non-essential-info'))
+    
+    if(totalWidth <= nonEssentialBreakpoint) {
+      essentialInfoEl.forEach((el) => {
+        el.style.display = 'none'
+      })
+    } else {
+      essentialInfoEl.forEach((el) => {
+        el.style.display = 'table-cell'
+      })
+    }
+  },[totalWidth])
+
 
 
   const calculateSubTotal = () => {
@@ -30,7 +52,7 @@ const Cart = () => {
   }
 
 
-  // now only thing to do is hide all cart__non-essential-item when it reach 875px
+  // now only thing to do is hide all cart__non-essential-info when it reach 875px
 
   return (
     <Wrapper>
@@ -43,9 +65,9 @@ const Cart = () => {
                 <th>Image</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
-                <th className='cart__non-essential-item'>Description</th>
-                <th className='cart__non-essential-item'>Rating</th>
-                <th className='cart__non-essential-item'>Brand</th>
+                <th className='cart__non-essential-info'>Description</th>
+                <th className='cart__non-essential-info'>Rating</th>
+                <th className='cart__non-essential-info'>Brand</th>
                 <th>Unit Price</th>
                 <th>Total</th>
               </tr>
@@ -61,9 +83,9 @@ const Cart = () => {
                     <button className='cart__update-remove-item'><BsFillXCircleFill/></button>
                   </div>
                 </td>
-                <td className='cart__non-essential-item'><p className='cart__order-description'>lorem ipsum ect lorem ipsum ect...</p></td>
-                <td className='cart__non-essential-item'><StarRating rating={3}/></td>
-                <td className='cart__non-essential-item'>ray-bans</td>
+                <td className='cart__non-essential-info'><p className='cart__order-description'>lorem ipsum ect lorem ipsum ect...</p></td>
+                <td className='cart__non-essential-info'><StarRating rating={3}/></td>
+                <td className='cart__non-essential-info'>ray-bans</td>
                 <td>$200</td>
                 <td>$800</td>
               </tr>
