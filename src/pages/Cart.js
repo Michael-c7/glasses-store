@@ -3,16 +3,20 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import BreadCrumb from '../components/Breadcrumb'
-import { GrUpdate, GrFormClose } from 'react-icons/gr'
 import { Button1 } from '../styledComponents/Button1'
 import StarRating from '../components/StarRating'
 
 import PlaceholderImage from '../assets/singleProductImagePlaceholders/sincerely-media-d05w6_7FaPM-unsplash.jpg'
 
-
+import { useCartContext } from '../contexts/cart_context'
 import { BsArrowRepeat, BsFillXCircleFill } from 'react-icons/bs'
 
 const Cart = () => {
+  const { 
+    productsInCart,
+    changeCartItemAmount,
+   } = useCartContext()
+
 
   let [totalWidth, setTotalWidth] = React.useState(window.innerWidth)
 
@@ -30,71 +34,67 @@ const Cart = () => {
     let essentialInfoEl = Array.from(document.querySelectorAll('.cart__non-essential-info'))
     
     if(totalWidth <= nonEssentialBreakpoint) {
-      essentialInfoEl.forEach((el) => {
-        el.style.display = 'none'
-      })
+      essentialInfoEl.forEach((el) => el.style.display = 'none')
     } else {
-      essentialInfoEl.forEach((el) => {
-        el.style.display = 'table-cell'
-      })
+      essentialInfoEl.forEach((el) => el.style.display = 'table-cell')
     }
   },[totalWidth])
 
 
 
-  const calculateSubTotal = () => {
-    /*
-    1. unit price of each item * them quantity(eg: item costs $20, have 4 of them 4 * 20)
-    2. do this for all items
-    3. add the cost of all items up,this the sub-total
-    4. add flat shipping rate ($5) to sub total, this is the total
-    */
-  }
-
-
-  // now only thing to do is hide all cart__non-essential-info when it reach 875px
 
   return (
     <Wrapper>
       <BreadCrumb/>
+      {productsInCart.length > 0 ? (
       <div className='cart__container'>
-        <div className='cart__order-container'>
-          <table className='cart__order__table'>
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th className='cart__non-essential-info'>Description</th>
-                <th className='cart__non-essential-info'>Rating</th>
-                <th className='cart__non-essential-info'>Brand</th>
-                <th>Unit Price</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><img className='cart__order-img' src={PlaceholderImage} title={`example title`} alt='img 1'/></td>
-                <td><Link to='/singleProducts/1234'>example name</Link></td>
-                <td>
-                  <div className='cart__quantity-container'>
-                    <input className='cart__quantity-input' type='text'/>
-                    <button className='cart__update-quantity-amt'><BsArrowRepeat/></button>
-                    <button className='cart__update-remove-item'><BsFillXCircleFill/></button>
-                  </div>
-                </td>
-                <td className='cart__non-essential-info'><p className='cart__order-description'>lorem ipsum ect lorem ipsum ect...</p></td>
-                <td className='cart__non-essential-info'><StarRating rating={3}/></td>
-                <td className='cart__non-essential-info'>ray-bans</td>
-                <td>$200</td>
-                <td>$800</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                 <div className='cart__order-container'>
+                 <table className='cart__order__table'>
+                   <thead>
+                     <tr>
+                       <th>Image</th>
+                       <th>Product Name</th>
+                       <th>Quantity</th>
+                       <th className='cart__non-essential-info'>Description</th>
+                       <th className='cart__non-essential-info'>Rating</th>
+                       <th className='cart__non-essential-info'>Brand</th>
+                       <th>Unit Price</th>
+                       <th>Total</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                   {productsInCart.map((el, index)  => {
+                     const { product, amount } = el
+                     const productImg = product.fields.image[0].url
+                     let descCharMax = 25
+                     
+       
+                     return (
+                       <tr key={product.id}>
+                         <td><img className='cart__order-img' src={productImg} title={`${product.fields.name}`} alt={`${product.fields.name}`}/></td>
+                         <td><Link to={`/singleProduct/${product.fields.productCode}`}>{product.fields.name}</Link></td>
+                         <td>
+                           <div className='cart__quantity-container'>
+                             <input className='cart__quantity-input' type='text' onChange={(e) => changeCartItemAmount(e.target.value, product.id)} value={amount}/>
+                             <button className='cart__update-quantity-amt'><BsArrowRepeat/></button>
+                             <button className='cart__update-remove-item'><BsFillXCircleFill/></button>
+                           </div>
+                         </td>
+                         <td className='cart__non-essential-info'><p className='cart__order-description'>{product.fields.description.slice(0, descCharMax)}...</p></td>
+                         <td className='cart__non-essential-info'><StarRating rating={product.fields.rating}/></td>
+                         <td className='cart__non-essential-info'>{product.fields.brand}</td>
+                         <td>${product.fields.price}</td>
+                         <td>${product.fields.price * amount}</td>
+                       </tr>
+                     )
+                   })}
+                   </tbody>
+                 </table>
+               </div>
+        
 
-        <div className='cart__summary-container'>
-           <table>
+          <div className='cart__summary-container'>
+            <table>
               <tbody>
                 <tr>
                   <th>Sub Total:</th>
@@ -114,17 +114,26 @@ const Cart = () => {
                 </tr>
               </tbody>
             </table>
-        </div>
+          </div>
+        
         
         <div className='cart__btns'>
-          <Button1>
-            <Link to='/'>Continue Shopping</Link>
-            </Button1>
-          <Button1>
-            <Link to='/checkout'>Checkout</Link>
-          </Button1>
+          <Link to='/products'>
+            <Button1>Continue Shopping</Button1>
+          </Link>
+
+          <Link to='/checkout'>
+            <Button1>Checkout</Button1>
+          </Link>
         </div>
-      </div>
+      </div> ) : (
+          <div className='cart__empty-cart-container'>
+            <h2>Your shopping cart is empty</h2>
+            <Link to='/products'>
+              <Button1>Start Shopping</Button1>
+            </Link>
+          </div>
+        )}
     </Wrapper>
   )
 }
@@ -230,6 +239,19 @@ const Wrapper = styled.section`
   .cart__order-description {
     max-width:25ch;
     margin:0 auto;
+  }
+
+
+
+  .cart__empty-cart-container {
+    margin:2rem 0;
+    height:75vh;
+    text-align:center;
+  }
+
+  .cart__empty-cart-container > h2 {
+    margin:1rem 0;
+    font-weight:500;
   }
 
 
