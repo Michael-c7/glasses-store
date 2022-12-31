@@ -6,6 +6,7 @@ import reducer from '../reducers/cart_reducer'
 import {
   ADD_PRODUCTS_TO_CART,
   UPDATE_CART_AMOUNT,
+  REMOVE_CART_ITEM,
   } from '../actions'
 
 
@@ -31,7 +32,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const removeCartItem = (itemId) => {
-      console.log('removeCartItem')
+      dispatch({ type:REMOVE_CART_ITEM, payload:itemId })
     }
 
     const calculateSubTotal = () => {
@@ -55,6 +56,7 @@ export const CartProvider = ({ children }) => {
              ...state,
              addProductToCart,
              changeCartItemAmount,
+             removeCartItem,
         
         }}>
           {children}

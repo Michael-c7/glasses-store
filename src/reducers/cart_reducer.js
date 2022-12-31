@@ -1,6 +1,7 @@
 import {
   ADD_PRODUCTS_TO_CART,
   UPDATE_CART_AMOUNT,
+  REMOVE_CART_ITEM,
   } from '../actions'
 
 
@@ -41,6 +42,13 @@ import {
       })
       
       return {...state, productsInCart:res}
+    }
+
+    if(action.type === REMOVE_CART_ITEM) {
+      let itemId = action.payload
+      let itemsDontRemove = state.productsInCart.filter((el) => el.product.id !== itemId)    
+      
+      return {...state, productsInCart:itemsDontRemove}
     }
     
 

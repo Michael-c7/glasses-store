@@ -15,6 +15,7 @@ const Cart = () => {
   const { 
     productsInCart,
     changeCartItemAmount,
+    removeCartItem,
    } = useCartContext()
 
 
@@ -129,7 +130,7 @@ useEffect(() => {
                            <div className='cart__quantity-container'>
                              <input className='cart__quantity-input' type='text' onChange={(e) => handleChange(product.id, e.target.value)} value={getVal(product.id) || 0}/>
                              <button className='cart__update-quantity-amt' onClick={() => clickHandle(product.id)}><BsArrowRepeat/></button>
-                             <button className='cart__update-remove-item'><BsFillXCircleFill/></button>
+                             <button className='cart__update-remove-item' onClick={() => removeCartItem(product.id)}><BsFillXCircleFill/></button>
                            </div>
                          </td>
                          <td className='cart__non-essential-info'><p className='cart__order-description'>{product.fields.description.slice(0, descCharMax)}...</p></td>
