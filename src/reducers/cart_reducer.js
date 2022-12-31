@@ -1,5 +1,6 @@
 import {
   ADD_PRODUCTS_TO_CART,
+  UPDATE_CART_AMOUNT,
   } from '../actions'
 
 
@@ -21,6 +22,25 @@ import {
        const res = Object.values(group)
 
        return {...state, productsInCart:res}
+    }
+
+    if(action.type === UPDATE_CART_AMOUNT) {
+      let itemId = action.payload.itemId
+      let itemAmount = action.payload.itemAmount
+
+      // let itemsDontChange = state.productsInCart.filter((el) => el.product.id !== itemId)
+      let itemProduct = state.productsInCart.filter((el) => el.product.id === itemId)[0].product
+      let itemIndex = state.productsInCart.map((el) => el.product.id).indexOf(itemId);
+
+      let res = state.productsInCart.map((el, index) => {
+        if(index === itemIndex) {
+          return {product:itemProduct, amount:itemAmount}
+        } else {
+          return el
+        }
+      })
+      
+      return {...state, productsInCart:res}
     }
     
 
