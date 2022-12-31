@@ -12,10 +12,21 @@ import { FaBars } from 'react-icons/fa'
 import { BiSearch } from 'react-icons/bi'
 import { MdClose } from 'react-icons/md'
 
+import { useCartContext } from '../contexts/cart_context'
 
 const Navbar = () => {
+  const { productsInCart } = useCartContext()
+
   const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(false)
   const { openSidebar } = useProductsContext()
+
+  const [totalCarItemAmt, setTotalCarItemAmt] = React.useState([])
+
+
+  React.useEffect(() => {
+    setTotalCarItemAmt(productsInCart.reduce((total,curr) => total + curr.amount,0))
+  },[productsInCart])
+
   return (
     <Wrapper className='navbar' id='navbar'>
       <div className='navbar__container-1'>
@@ -51,7 +62,7 @@ const Navbar = () => {
               <BsBag className='navbar__icon'/>
             </Link>
             <div className='navbar__cart-item-amt'>
-              <span>95</span>
+              <span>{totalCarItemAmt}</span>
             </div>
           </div>
         </div>
@@ -158,7 +169,7 @@ const Wrapper = styled.nav`
     top:0;
     left:50%;
     transform:translateY(-50%);
-    width:20px;
+    min-width:20px;
     height:20px;
     padding:4px;
     font-size:0.85rem;
