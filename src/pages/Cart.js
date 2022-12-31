@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -29,7 +29,7 @@ const Cart = () => {
   })
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     let nonEssentialBreakpoint = 768
     let essentialInfoEl = Array.from(document.querySelectorAll('.cart__non-essential-info'))
     
@@ -41,6 +41,58 @@ const Cart = () => {
   },[totalWidth])
 
 
+ // store the local amt values, id for identification amt for amt, array of objs
+  // const [amountValues, setAmountValues] = React.useState([{id:'abc123', amount:2}]);
+  const [amountValues, setAmountValues] = React.useState([]);
+
+  /*
+  set values w/ amt, id 
+*/
+
+
+useEffect(() => {
+  let data = productsInCart.map((el) => {
+    return {id:el.product.id, amount:el.amount}
+  })
+
+  setAmountValues(data)
+}, [productsInCart])
+
+
+
+  const handleChange = (id,amount) => {
+    // let onlyNumberGreaterThanZeroRegex = /^([1-9][0-9]+|[1-9])$/
+    let onlyNumbersRegex = /\d+/g
+    let cleanAmount = Number(amount.split('').filter(el => el.search(onlyNumbersRegex) === 0).join(''))
+
+
+    let itemsDontChange = amountValues.filter((el) => el.id !== id)
+    setAmountValues([...itemsDontChange, {id, amount:cleanAmount}])
+  }
+
+
+
+  const clickHandle = (id) => {
+    // 1. get the correct amount from the local state (amountValues) using the id 
+    let currentAmt = getVal(id)
+    
+    if(currentAmt === 0) {
+      currentAmt = 1
+    }
+
+    // 2. send the amount to the cart state to change in the reducer
+    changeCartItemAmount(id, currentAmt)
+  }
+
+  let getVal = (id) => {
+    return amountValues.filter((el) => el.id === id)[0]?.amount
+  }
+
+
+  /*
+  doing now
+  https://stackoverflow.com/questions/69690181/reactjs-warning-a-component-is-changing-an-uncontrolled-input-to-be-controll
+  */
 
 
   return (
@@ -66,7 +118,7 @@ const Cart = () => {
                    {productsInCart.map((el, index)  => {
                      const { product, amount } = el
                      const productImg = product.fields.image[0].url
-                     let descCharMax = 25
+                     let descCharMax = 60
                      
        
                      return (
@@ -75,8 +127,8 @@ const Cart = () => {
                          <td><Link to={`/singleProduct/${product.fields.productCode}`}>{product.fields.name}</Link></td>
                          <td>
                            <div className='cart__quantity-container'>
-                             <input className='cart__quantity-input' type='text' onChange={(e) => changeCartItemAmount(e.target.value, product.id)} value={amount}/>
-                             <button className='cart__update-quantity-amt'><BsArrowRepeat/></button>
+                             <input className='cart__quantity-input' type='text' onChange={(e) => handleChange(product.id, e.target.value)} value={getVal(product.id) || 0}/>
+                             <button className='cart__update-quantity-amt' onClick={() => clickHandle(product.id)}><BsArrowRepeat/></button>
                              <button className='cart__update-remove-item'><BsFillXCircleFill/></button>
                            </div>
                          </td>
