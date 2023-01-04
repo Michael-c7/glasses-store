@@ -8,6 +8,7 @@ import { Button1 } from '../styledComponents/Button1'
 
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { useProductsContext } from '../contexts/products_context'
+import { useCartContext } from '../contexts/cart_context'
 
 
 
@@ -22,11 +23,10 @@ import placeholder4 from '../assets/singleProductImagePlaceholders/sincerely-med
 
 const SingleProduct = () => {
   const { products } = useProductsContext()
-
+  const { addProductToCart } = useCartContext()
 
   const sampleLocation = useLocation();
   let currentProductId = sampleLocation.pathname.slice(15)
-  let testDesc = 'Imagine the advantages of going big without slowing down. The big 19" 941BW monitor combines wide aspect ratio with fast pixel response time, for bigger images, more room to work and crisp motion. In addition, the exclusive MagicBright 2, MagicColor and MagicTune technologies help deliver the ideal image in every situation, while sleek, narrow bezels and adjustable stands deliver style just the way you want it. With the Samsung 941BW widescreen analog/digital LCD monitor, its not hard to imagine.'
 
   let minInputValueAllowed = 1
   let maxInputValueAllowed = 999
@@ -64,6 +64,8 @@ const SingleProduct = () => {
     setCurrentProduct(curr)
   },[products])
 
+
+  
   React.useEffect(() => {
     setMainImageState(currentProduct?.fields?.image[0].url)
   },[currentProduct])
@@ -122,7 +124,8 @@ const SingleProduct = () => {
                       <FaPlus/>
                     </button>
                   </div>
-                  <Button1>Add to Cart</Button1>
+                  {/*add to cart button*/}
+                  <Button1 onClick={() => addProductToCart(currentProduct,productAmt)}>Add to Cart</Button1>
                 </div>
               </div>
             </div>
