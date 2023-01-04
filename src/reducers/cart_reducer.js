@@ -2,6 +2,8 @@ import {
   ADD_PRODUCTS_TO_CART,
   UPDATE_CART_AMOUNT,
   REMOVE_CART_ITEM,
+  CALCULATE_SUBTOTAL,
+  CALCULATE_TOTAL_PRODUCTS_IN_CART,
   } from '../actions'
 
 
@@ -49,6 +51,18 @@ import {
       let itemsDontRemove = state.productsInCart.filter((el) => el.product.id !== itemId)    
       
       return {...state, productsInCart:itemsDontRemove}
+    }
+
+
+    if(action.type === CALCULATE_SUBTOTAL) {
+      let nums = state.productsInCart.map((el) => el.amount * el.product.fields.price)
+      let subTotal = nums.reduce((total, curr) => total + curr, 0)
+      return {...state, subTotal}
+    }
+
+    if(action.type === CALCULATE_TOTAL_PRODUCTS_IN_CART) {
+      let res = state.productsInCart.reduce((total,curr) => total + curr.amount,0)
+      return {...state, totalProductsInCart:res}
     }
     
 
