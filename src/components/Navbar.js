@@ -15,17 +15,14 @@ import { MdClose } from 'react-icons/md'
 import { useCartContext } from '../contexts/cart_context'
 
 const Navbar = () => {
-  const { productsInCart } = useCartContext()
-
-  const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(false)
+  const { 
+    productsInCart,
+    totalProductsInCart
+  } = useCartContext()
   const { openSidebar } = useProductsContext()
 
-  const [totalCarItemAmt, setTotalCarItemAmt] = React.useState([])
+  const [showMobileSearchbar, setShowMobileSearchbar] = React.useState(false)
 
-
-  React.useEffect(() => {
-    setTotalCarItemAmt(productsInCart.reduce((total,curr) => total + curr.amount,0))
-  },[productsInCart])
 
   return (
     <Wrapper className='navbar' id='navbar'>
@@ -62,7 +59,7 @@ const Navbar = () => {
               <BsBag className='navbar__icon'/>
             </Link>
             <div className='navbar__cart-item-amt'>
-              <span>{totalCarItemAmt}</span>
+              <span>{totalProductsInCart}</span>
             </div>
           </div>
         </div>
