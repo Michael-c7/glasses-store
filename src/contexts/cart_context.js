@@ -7,12 +7,15 @@ import {
   ADD_PRODUCTS_TO_CART,
   UPDATE_CART_AMOUNT,
   REMOVE_CART_ITEM,
+  CALCULATE_SUBTOTAL,
+  CALCULATE_TOTAL_PRODUCTS_IN_CART,
   } from '../actions'
 
 
 const initialState = {
   productsInCart:[],
   subTotal:0,
+  totalProductsInCart:0,
 }
 
 const CartContext = React.createContext()
@@ -35,20 +38,22 @@ export const CartProvider = ({ children }) => {
       dispatch({ type:REMOVE_CART_ITEM, payload:itemId })
     }
 
-    const calculateSubTotal = () => {
-      console.log('calculateSubTotal')
-            /*
-      1. unit price of each item * them quantity(eg: item costs $20, have 4 of them 4 * 20)
-      2. do this for all items
-      3. add the cost of all items up,this the sub-total
-      4. add flat shipping rate ($5) to sub total, this is the total
-      */
+    const calculateSubTotal = _ => {
+      dispatch({ type:CALCULATE_SUBTOTAL })
+    }
+
+    const calculateTotalProductsInCart = () => {
+      dispatch({ type:CALCULATE_TOTAL_PRODUCTS_IN_CART })
     }
 
 
     // React.useEffect(() => {
     //   console.log(state.productsInCart)
     // }, [state])
+
+    React.useEffect(() => {
+      calculateTotalProductsInCart()
+    }, [state.productsInCart])
 
     return (
         <CartContext.Provider
@@ -57,6 +62,8 @@ export const CartProvider = ({ children }) => {
              addProductToCart,
              changeCartItemAmount,
              removeCartItem,
+             calculateSubTotal,
+             calculateTotalProductsInCart,
         
         }}>
           {children}
