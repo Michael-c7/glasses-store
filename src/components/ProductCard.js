@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import StarRating from '../components/StarRating'
 import { Button1 } from '../styledComponents/Button1'
 import { useFilterContext } from '../contexts/filter_context'
+import { useCartContext } from '../contexts/cart_context'
 
 
 const ProductCard = ({product}) => {
@@ -11,6 +12,11 @@ const ProductCard = ({product}) => {
         isGridViewActive,
         isListViewActive,
     } = useFilterContext()
+
+    const {
+        addProductToCart,
+    } = useCartContext()
+    
 
 
     const { fields } = product
@@ -71,7 +77,8 @@ const ProductCard = ({product}) => {
                     </div>
                     <p>{isListViewActive && `${fields.description.slice(0, maxCharDescAmt)}...`}</p>
                     <p className='productCard__price'>${fields.price} {isSaleWidgetShown && <span className='original-price-text'>${fakeOriginalPrice}</span>} </p>
-                    <Button1 className='productCard__add-to-cart-btn' style={{fontSize:'0.75rem', margin:'0.5rem 0'}}>Add to Cart</Button1>
+                    {/*add to cart button*/}
+                    <Button1 onClick={() => addProductToCart(product)} className='productCard__add-to-cart-btn' style={{fontSize:'0.75rem', margin:'0.5rem 0'}}>Add to Cart</Button1>
                 </div>
             </div>
         </Wrapper>
