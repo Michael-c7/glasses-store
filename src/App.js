@@ -8,6 +8,7 @@ import SingleProduct from './pages/SingleProduct'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Error from './pages/Error';
+import OrderSuccessful from './pages/OrderSuccessful'
 // components
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
@@ -28,6 +29,8 @@ function App() {
         <Route path="/singleProduct/:productId" element={ <SingleProduct/> } />
         <Route path="/cart" element={ <Cart/> } />
         <Route path="/checkout" element={ <Checkout/> } />
+        <Route path="/orderSuccessful" element={ <OrderSuccessful/> } />
+
         <Route path="*" element={ <Error/> } />
       </Routes>
       <ScrollToTop/>
