@@ -4,6 +4,8 @@ import {
   REMOVE_CART_ITEM,
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_PRODUCTS_IN_CART,
+  REMOVE_ALL_PRODUCTS_IN_CART,
+  GENERATE_ORDER_NUMBER
   } from '../actions'
 
 
@@ -63,6 +65,18 @@ import {
     if(action.type === CALCULATE_TOTAL_PRODUCTS_IN_CART) {
       let res = state.productsInCart.reduce((total,curr) => total + curr.amount,0)
       return {...state, totalProductsInCart:res}
+    }
+
+    if(action.type === REMOVE_ALL_PRODUCTS_IN_CART) {
+      return {
+        ...state, productsInCart:[],
+      }
+    }
+
+    if(action.type === GENERATE_ORDER_NUMBER) {
+      let orderNumber = Math.round(Math.random() * 100000)
+
+      return {...state, orderNumber:orderNumber}
     }
     
 

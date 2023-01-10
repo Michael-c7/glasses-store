@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     MOBILE_FILTER_MENU_OPEN,
     MOBILE_FILTER_MENU_CLOSE,
@@ -13,8 +12,6 @@ import {
     SHOW_LIST_VIEW,
   } from '../actions'
 
-import Products from '../pages/Products'
-
 import { getNotUnique } from '../utility/misc'
 
 const filter_reducer = (state, action) => {
@@ -24,31 +21,18 @@ const filter_reducer = (state, action) => {
         return {...state, isMobileFilterOpen:true}
     }
 
-
     if(action.type === MOBILE_FILTER_MENU_CLOSE) {
         return {...state, isMobileFilterOpen:false}
     }
-
 
     if(action.type === SET_FILTERED_PRODUCTS) {
         return {...state, filteredProducts:action.payload}
     }
 
-
     if(action.type === UPDATE_CATEGORY_FILTERS) {
         let categoryFiltersState = state.categoryFilters
         let categoryName = action.payload.filterName
         let categoryValue = action.payload.filterValue
-        /*
-            categoryFilters:{
-                searchTerm:'',
-                gender:[],
-                brand:[],
-                materials:[],
-                color:[],
-                price:{min:0, max:0},
-            }
-        */
         
         return {
             ...state,
@@ -93,15 +77,11 @@ const filter_reducer = (state, action) => {
                 }
             })
         }
-
-
         return {
             ...state,
             filteredProducts:tempProducts,
         }
     }
-
-
 
     if(action.type === UPDATE_SORT_FILTERS) {
         let sortFiltersState = state.sortFilters
@@ -114,13 +94,9 @@ const filter_reducer = (state, action) => {
         }
     }
 
-
     if(action.type === SORT_FILTERS) {
         let sortFiltersState = state.sortFilters
         let tempProducts = []
-
-
-
   
         if(sortFiltersState.sortBy === 'default') {
             let productsCopy = [...action.payload]
@@ -227,9 +203,6 @@ const filter_reducer = (state, action) => {
             isListViewActive:true,
         }
     }
-
-    
-   
 
 
     throw new Error(`No Matching "${action.type}" - action type`)

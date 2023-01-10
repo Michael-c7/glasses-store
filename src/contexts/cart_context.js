@@ -2,7 +2,6 @@
 import React, { useEffect, useContext, useReducer } from 'react'
 import reducer from '../reducers/cart_reducer'
 
-
 import {
   ADD_PRODUCTS_TO_CART,
   UPDATE_CART_AMOUNT,
@@ -24,7 +23,6 @@ const initialState = {
 
 const CartContext = React.createContext()
 
-
 export const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -32,7 +30,6 @@ export const CartProvider = ({ children }) => {
     const addProductToCart = (product, amount = 1) => {
       dispatch({ type: ADD_PRODUCTS_TO_CART, payload:{product, amount} })
     }
-
 
     const changeCartItemAmount = (itemId, itemAmount) => {
       dispatch({ type:UPDATE_CART_AMOUNT, payload:{itemId, itemAmount} })
@@ -50,20 +47,13 @@ export const CartProvider = ({ children }) => {
       dispatch({ type:CALCULATE_TOTAL_PRODUCTS_IN_CART })
     }
 
-
     const removeAllProductsInCart = () => {
       dispatch({ type:REMOVE_ALL_PRODUCTS_IN_CART })
     }
 
-
     const generateOrderNumber = _ => {
       dispatch({type: GENERATE_ORDER_NUMBER })
     }
-
-
-    // React.useEffect(() => {
-    //   console.log(state.productsInCart)
-    // }, [state])
 
     React.useEffect(() => {
       calculateTotalProductsInCart()
@@ -80,7 +70,6 @@ export const CartProvider = ({ children }) => {
              calculateTotalProductsInCart,
              removeAllProductsInCart,
             generateOrderNumber,
-        
         }}>
           {children}
         </CartContext.Provider>
@@ -88,7 +77,6 @@ export const CartProvider = ({ children }) => {
 }
 
 
-// make sure use
 export const useCartContext = () => {
   return useContext(CartContext)
 }
