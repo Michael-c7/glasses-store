@@ -23,13 +23,13 @@ const Products = () => {
     sortFilters,
     sortFilterFunctionality,
     setFiltersProduct,
+    isGridViewActive,
+    isListViewActive,
   } = useFilterContext()
 
   const {
     isProductsLoading
   } = useProductsContext()
-
-
 
   let [productsCopy, setProductsCopy] = React.useState([])
   let [isLoading, setIsLoading] = React.useState(true)
@@ -66,9 +66,6 @@ const Products = () => {
         setIsLoading(false)
       }, 1000)
   }, [products])
-
-
-
   
 
   return (
@@ -83,7 +80,7 @@ const Products = () => {
         <div className='products__products-outer-container'>
           <FilterProductsBar/>
           {isLoading ? <Loading/> : (
-            <ul className='products'>
+            <ul className={`products ${isGridViewActive && 'products--grid-view'} ${isListViewActive && 'products--list-view'}`}>
               {filteredProducts?.map((product, index) => {
                 return (
                   <ProductCard product={product} key={index}/>
@@ -103,7 +100,6 @@ const Products = () => {
 export default Products
 
 
-
 const Wrapper = styled.section`
   .products__outer-container {
     display:grid;
@@ -121,8 +117,6 @@ const Wrapper = styled.section`
       grid-template-columns:1fr;
     }
   }
-
-
 
   .products__filter-outer-container--mobile {
     position:absolute;
@@ -144,10 +138,22 @@ const Wrapper = styled.section`
 
   .products {
     --products-shown-amt:3;
+  }
+
+
+  .products--grid-view {
     display:grid;
     grid-template-columns:repeat(var(--products-shown-amt), 1fr);
     gap:1rem;
   }
+
+  .products--list-view {
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:1rem;
+  }
+
+
 
 
   @media (max-width: 1024px) {

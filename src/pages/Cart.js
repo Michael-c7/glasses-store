@@ -6,6 +6,7 @@ import { Button1 } from "../styledComponents/Button1";
 import StarRating from "../components/StarRating";
 import { useCartContext } from "../contexts/cart_context";
 import { BsArrowRepeat, BsFillXCircleFill } from "react-icons/bs";
+import { toCurrency } from "../utility/misc";
 
 const Cart = () => {
   const {
@@ -13,6 +14,7 @@ const Cart = () => {
     changeCartItemAmount,
     removeCartItem,
     subTotal,
+    shipping,
     calculateSubTotal,
   } = useCartContext();
 
@@ -50,7 +52,6 @@ const Cart = () => {
   }, [productsInCart]);
 
   const handleChange = (id, amount) => {
-    // let onlyNumberGreaterThanZeroRegex = /^([1-9][0-9]+|[1-9])$/
     let onlyNumbersRegex = /\d+/g;
     let cleanAmount = Number(
       amount
@@ -156,8 +157,8 @@ const Cart = () => {
                       <td className="cart__non-essential-info">
                         {product.fields.brand}
                       </td>
-                      <td>${product.fields.price}</td>
-                      <td>${product.fields.price * amount}</td>
+                      <td>{toCurrency(product.fields.price, 'USD', 'en-us')}</td>
+                      <td>{toCurrency(product.fields.price * amount, 'USD', 'en-us')}</td>
                     </tr>
                   );
                 })}
@@ -170,19 +171,19 @@ const Cart = () => {
               <tbody>
                 <tr>
                   <th>Sub Total:</th>
-                  <td>${subTotal}</td>
+                  <td>{toCurrency(subTotal, 'USD', 'en-us')}</td>
                 </tr>
               </tbody>
               <tbody>
                 <tr>
                   <th>Flat Shipping Rate: </th>
-                  <td>${5}</td>
+                  <td>{toCurrency(shipping, 'USD', 'en-us')}</td>
                 </tr>
               </tbody>
               <tbody>
                 <tr>
                   <th>Total:</th>
-                  <td className="cart__total-amt-num">${subTotal + 5}</td>
+                  <td className="cart__total-amt-num">{toCurrency(subTotal + shipping, 'USD', 'en-us')}</td>
                 </tr>
               </tbody>
             </table>
