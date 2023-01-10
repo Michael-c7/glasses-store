@@ -43,7 +43,7 @@ const Searchbar = () => {
 
     return (
         <Wrapper>
-            <input className='searchbar__search-input' id='searchbar__search-input' placeholder='Search...' ref={searchInputRef} autocomplete='off' onChange={(e) => setSearchTerm(e.target.value)}/>
+            <input className='searchbar__search-input' id='searchbar__search-input' placeholder='Search...' ref={searchInputRef} autoComplete='off' onChange={(e) => setSearchTerm(e.target.value)}/>
             <BiSearch className='searchbar__icon'/>
             <div className={`searchbar__dropdown ${isProductDropdownShown ? 'searchbar__dropdown--show' : 'searchbar__dropdown--hide'}`}>
                 <ul className='searchbar__dropdown__items'>
