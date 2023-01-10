@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { BiSearch } from 'react-icons/bi'
 import { useProductsContext } from '../contexts/products_context'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, } from 'react-router-dom'
 
 
 const Searchbar = () => {
     const { products } = useProductsContext()
+    // let urlLocation = useLocation().pathname
 
 
     const [isProductDropdownShown, setIsProductDropdownShown] = React.useState(false)
@@ -15,7 +16,7 @@ const Searchbar = () => {
     const searchInputRef = React.useRef()
     let productShowAmt = 5
 
-    let urlLocation = useLocation().pathname
+    
 
 
     React.useEffect(() => {
@@ -34,12 +35,9 @@ const Searchbar = () => {
 
 
 
-    const handleLink = _ => {
+    const handleLink = () => {
         document.querySelector('#searchbar__search-input').value= ''
         setIsProductDropdownShown(false)
-        if(urlLocation.includes('singleProduct')) {
-            setTimeout(() => window.location.reload(), 0)
-        }
     }
 
 

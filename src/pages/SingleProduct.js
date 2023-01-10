@@ -25,6 +25,8 @@ const SingleProduct = () => {
   const { products } = useProductsContext()
   const { addProductToCart } = useCartContext()
 
+  let urlLocation = useLocation().pathname
+
   const sampleLocation = useLocation();
   let currentProductId = sampleLocation.pathname.slice(15)
 
@@ -62,7 +64,8 @@ const SingleProduct = () => {
   React.useEffect(() => {
     let curr = products?.filter((item) => item.fields.productCode === currentProductId)[0]
     setCurrentProduct(curr)
-  },[products])
+    setProductAmt(1)
+  },[products, urlLocation])
 
 
   
