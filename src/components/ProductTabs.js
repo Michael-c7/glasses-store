@@ -61,7 +61,7 @@ export default ProductTabs
 
 
 const Wrapper = styled.section`
-    margin:7.5rem 0;
+    margin:7.5rem 1rem;
     position:relative;
 
     .productTabs__heading {
