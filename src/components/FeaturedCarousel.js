@@ -9,7 +9,6 @@ import Loading from './Loading'
 const FeaturedCarousel = () => {
     const { products, isProductsLoading } = useProductsContext()
     
-
     let [productData, setProductData] = React.useState([])
     let [currentSlideIndex, setCurrentSlideIndex] = React.useState(0)
     
@@ -72,16 +71,16 @@ const FeaturedCarousel = () => {
             // 4 is the default amount of cards shown on screen
             setVisibleCardAmt(4)
         }
-
     }, [totalWidth])
-
-
 
     React.useEffect(() => {
         setProductData(products.slice(0, itemAmtCarousel))
-
-        setLastSlideIndex(productData.length - visibleCardAmt)
     }, [products])
+
+
+    React.useEffect(() => {
+        setLastSlideIndex(productData.length - visibleCardAmt)
+    },[productData.length, visibleCardAmt])
 
 
 
@@ -90,7 +89,6 @@ const FeaturedCarousel = () => {
             {isProductsLoading ? <Loading/> : (
                 <div className='featuredCarousel__outer-container'>
                     <h2 className='featuredCarousel__heading'>Featured</h2>
-                    {/*disabled */}
                     <button className='featuredCarousel__slider-btn featuredCarousel__prev-btn' disabled={currentSlideIndex === 0 && true} onClick={prevSlide}>
                         <GrPrevious/>
                     </button>
