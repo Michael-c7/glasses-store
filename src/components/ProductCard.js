@@ -6,6 +6,7 @@ import { Button1 } from '../styledComponents/Button1'
 import { useFilterContext } from '../contexts/filter_context'
 import { useCartContext } from '../contexts/cart_context'
 
+import {toCurrency} from '../utility/misc'
 
 const ProductCard = ({product}) => {
     const { 
@@ -16,15 +17,8 @@ const ProductCard = ({product}) => {
     const {
         addProductToCart,
     } = useCartContext()
-    
-
 
     const { fields } = product
-    /*the number that fields.price
-    is multiplied by is an
-    arbitrarily chosen number */
-    let fakeOriginalPrice = Math.round(fields.price * 1.6)
-    let isSaleWidgetShown = false
 
     let maxCharDescAmt = 200
 
@@ -34,13 +28,10 @@ const ProductCard = ({product}) => {
 
     const updateWidth = () => setPageWidth(window.innerWidth);
 
-
-
     React.useEffect(() => {
         window.addEventListener("resize", updateWidth);
         return () => window.removeEventListener("resize", updateWidth);
     });
-
 
 
     React.useEffect(() => {
@@ -66,7 +57,7 @@ const ProductCard = ({product}) => {
         <Wrapper>
             <div className={`productCard ${isGridViewActive && 'productCard--gridView'} ${isListViewActive && 'productCard--listView'}`}>
                 <Link to={`/singleProduct/${fields.productCode}`}>
-                    <div className={`productCard__image-container ${isSaleWidgetShown && 'sale-class'}`}>
+                    <div className={`productCard__image-container`}>
                         <img className='productCard__image' src={fields.image[0].url}  title={fields.name} alt={fields.name}/>
                     </div>
                 </Link>
@@ -76,7 +67,7 @@ const ProductCard = ({product}) => {
                         <StarRating className='productCard__stars' rating={fields?.rating} horizontalSpacing={`${horizontalSpacingState}`}/>
                     </div>
                     <p>{isListViewActive && `${fields.description.slice(0, maxCharDescAmt)}...`}</p>
-                    <p className='productCard__price'>${fields.price} {isSaleWidgetShown && <span className='original-price-text'>${fakeOriginalPrice}</span>} </p>
+                    <p className='productCard__price'>{toCurrency(fields.price, 'USD', 'en-us')}</p>
                     {/*add to cart button*/}
                     <Button1 onClick={() => addProductToCart(product)} className='productCard__add-to-cart-btn' style={{fontSize:'0.75rem', margin:'0.5rem 0'}}>Add to Cart</Button1>
                 </div>
@@ -96,15 +87,11 @@ const Wrapper = styled.div`
         position:relative;
     }
 
-
-
     .productCard__image-container {
         position:relative;
-        // max-width:280px;
         height:325px;
         background:var(--background-card-color);
     }
-
     
     .productCard__image {
         width:100%;
@@ -112,11 +99,9 @@ const Wrapper = styled.div`
         object-fit:contain;
     }
 
-
     .productCard__info {
         padding:1rem 0;
     }
-
 
     .productCard__name {
         font-size:1.25rem;
@@ -124,55 +109,15 @@ const Wrapper = styled.div`
         text-transform:capitalize;
     }
 
-
-
-
     .productCard__price {
         font-size:1.25rem;
     }
-
-
-
-    
-
-
-
-    .sale-class::before {
-        content:'SALE';
-        position:absolute;
-        width:0%;
-        height:2px;
-        color:var(--red);
-        left:0%;
-        top:0;
-        margin:1rem;
-        font-size:0.8rem;
-        font-weight:400;
-    }
-
-    .sale-class::after {
-        content:'';
-        position:absolute;
-        width:36px;
-        height:23px;
-        background:none;
-        left:-2px;
-        top:-4px;
-        margin:1rem;
-        font-size:0.8rem;
-        border:1px solid var(--red);
-        border-left:none;
-        border-right:none;
-    }
-
 
     .original-price-text {
         color:#B7B7B7;
         font-size:0.95rem;
         text-decoration:line-through;
     }
-
-
 
     .productCard--gridView {
         display:flex;
@@ -194,10 +139,8 @@ const Wrapper = styled.div`
             gap:5rem;
             text-align:center;
             grid-template-rows:minmax(100px,250px) 1fr;
-
         }
       }
-
 
     .productCard--listView .productCard__info > * {
         margin-bottom:0.35rem;
