@@ -19,6 +19,7 @@ const Checkout = () => {
     shipping,
     removeAllProductsInCart,
     generateOrderNumber,
+    calculateSubTotal,
   } = useCartContext();
 
   const navigate = useNavigate();
@@ -353,6 +354,11 @@ const Checkout = () => {
     // link to success page
     navigate('/orderSuccessful')
   }
+
+
+  React.useEffect(() => {
+    calculateSubTotal()
+  }, [productsInCart])
 
 
   return (
