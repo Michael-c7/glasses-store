@@ -16,7 +16,6 @@ const initialState = {
   products:[],
   isProductsLoading:false,
   isProductsError:false,
-  
 }
 
 const ProductsContext = React.createContext()
@@ -27,7 +26,6 @@ export const ProductsProvider = ({ children }) => {
   const openSidebar = () => {
     dispatch({ type: SIDEBAR_OPEN })
     document.body.style.overflow = 'hidden'
-    
   }
 
   const closeSidebar = () => {
@@ -49,13 +47,9 @@ export const ProductsProvider = ({ children }) => {
 
 
 
-
-
   React.useEffect(() => {
     getProducts(process.env.REACT_APP_GLASSES_DATA_URL)
   }, [])
-
-  
 
   return (
     <ProductsContext.Provider
