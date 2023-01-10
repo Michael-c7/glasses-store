@@ -4,11 +4,9 @@ import reducer from '../reducers/products_reducer'
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
-
   GET_PRODUCTS_START,
   GET_PRODUCTS,
   IS_PRODUCTS_ERROR,
-
 } from '../actions'
 
 const initialState = {
