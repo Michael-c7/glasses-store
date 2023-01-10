@@ -358,7 +358,7 @@ const Checkout = () => {
   return (
     <Wrapper>
       <BreadCrumb />
-      {productsInCart > 0 ? (
+      {productsInCart.length > 0 ? (
         <div className="checkout__container">
           <form className="checkout__inner-container" onSubmit={(e) => onSubmit(e)}>
             <div className="col-1">
