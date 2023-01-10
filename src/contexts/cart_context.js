@@ -9,6 +9,8 @@ import {
   REMOVE_CART_ITEM,
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_PRODUCTS_IN_CART,
+  REMOVE_ALL_PRODUCTS_IN_CART,
+  GENERATE_ORDER_NUMBER,
   } from '../actions'
 
 
@@ -16,6 +18,8 @@ const initialState = {
   productsInCart:[],
   subTotal:0,
   totalProductsInCart:0,
+  shipping:5,
+  orderNumber:null,
 }
 
 const CartContext = React.createContext()
@@ -47,6 +51,16 @@ export const CartProvider = ({ children }) => {
     }
 
 
+    const removeAllProductsInCart = () => {
+      dispatch({ type:REMOVE_ALL_PRODUCTS_IN_CART })
+    }
+
+
+    const generateOrderNumber = _ => {
+      dispatch({type: GENERATE_ORDER_NUMBER })
+    }
+
+
     // React.useEffect(() => {
     //   console.log(state.productsInCart)
     // }, [state])
@@ -64,6 +78,8 @@ export const CartProvider = ({ children }) => {
              removeCartItem,
              calculateSubTotal,
              calculateTotalProductsInCart,
+             removeAllProductsInCart,
+            generateOrderNumber,
         
         }}>
           {children}
