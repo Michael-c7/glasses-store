@@ -253,6 +253,7 @@ const Checkout = () => {
     let requiredInputs = Array.from(document.querySelectorAll('.info-input__label--required'))
     let requiredNumAmt = requiredInputs.length
 
+    
 
 
     requiredInputs.forEach((el) => {
@@ -353,10 +354,11 @@ const Checkout = () => {
     navigate('/orderSuccessful')
   }
 
+
   return (
     <Wrapper>
       <BreadCrumb />
-      {productsInCart.length > 0 ? (
+      {productsInCart > 0 ? (
         <div className="checkout__container">
           <form className="checkout__inner-container" onSubmit={(e) => onSubmit(e)}>
             <div className="col-1">
@@ -460,10 +462,10 @@ const Checkout = () => {
                             </label>
                             <input className="info-input__input summary__info__input" onChange={(e) => handleChange(product.id, e.target.value)} value={getVal(product.id) || 0}/>
                             <div className="summary__info-btns">
-                              <button className="summary__info-btn" onClick={() => increaseCartAmt(product.id)}>
+                              <button className="summary__info-btn" type='button' onClick={() => increaseCartAmt(product.id)}>
                                 <RiArrowUpSLine />
                               </button>
-                              <button className="summary__info-btn" onClick={() => decreaseCartAmt(product.id)}>
+                              <button className="summary__info-btn" type='button' onClick={() => decreaseCartAmt(product.id)}>
                                 <RiArrowDownSLine />
                               </button>
                             </div>
@@ -502,7 +504,7 @@ const Checkout = () => {
                     value={orderComment}
                   ></textarea>
                 </div>
-                <Button1 className="checkout__order-btn" type='submit' disabled={!isPaymentReady}>
+                <Button1 className="checkout__order-btn" type='submit' disabled={!isPaymentReady} >
                   Place Order
                 </Button1>
               </div>
