@@ -33,7 +33,6 @@ import {
       let itemId = action.payload.itemId
       let itemAmount = action.payload.itemAmount
 
-      // let itemsDontChange = state.productsInCart.filter((el) => el.product.id !== itemId)
       let itemProduct = state.productsInCart.filter((el) => el.product.id === itemId)[0].product
       let itemIndex = state.productsInCart.map((el) => el.product.id).indexOf(itemId);
 
@@ -79,7 +78,6 @@ import {
       return {...state, orderNumber:orderNumber}
     }
     
-
 
     throw new Error(`No Matching "${action.type}" - action type`)
 
