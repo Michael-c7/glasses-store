@@ -46,7 +46,7 @@ const Wrapper = styled.section`
     height:350px;
     background-image:url(${bgPattern});
     background-position:50%; 
-    margin-top:1.5rem;
+    // margin-top:1.5rem;
 
     .newsletter__info {
         position:relative;

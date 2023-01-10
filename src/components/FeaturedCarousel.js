@@ -117,6 +117,8 @@ const FeaturedCarousel = () => {
 export default FeaturedCarousel
 
 const Wrapper = styled.section`
+        margin:4rem 0 3rem;
+
         --featuredCarouselHeight:600px;
         --card-width:300px;
         --card-amt-shown:4;
@@ -144,7 +146,7 @@ const Wrapper = styled.section`
 
         .featuredCarousel__heading {
             text-align:center;
-            margin:1.5rem 0;
+            margin:0 0 1.5rem 0;
             text-align:center;
             font-size:2.25rem;
             font-weight:500;
