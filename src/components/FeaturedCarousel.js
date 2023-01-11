@@ -146,7 +146,7 @@ const Wrapper = styled.section`
 
         .featuredCarousel__heading {
             text-align:center;
-            margin:0 0 1.5rem 0;
+            margin:1.5rem 0 1.5rem 0;
             text-align:center;
             font-size:2.25rem;
             font-weight:500;
@@ -168,7 +168,7 @@ const Wrapper = styled.section`
             border:2px solid #efefef;
             z-index:10;
             transition:0.3s ease;
-            top:calc(50% - 40px);
+            top:calc((50% - 40px));
             transform:translateY(-50%);
         }
 
