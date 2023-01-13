@@ -72,6 +72,7 @@ const Wrapper = styled.section`
 
     .serviceBanner__icon-container {
         font-size:3rem;
+        color:#7E7C82;
     }
 
     .serviceBanner__heading {
