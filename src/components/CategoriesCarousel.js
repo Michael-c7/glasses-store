@@ -56,7 +56,6 @@ const CategoriesCarousel = () => {
     let [totalWidth, setTotalWidth] = React.useState(window.innerWidth)
     let lastSlideIndex = visibleCardAmt > 1 ? (categoriesCarouselData.length / visibleCardAmt) + 1 : categoriesCarouselData.length - 1;
 
-
     const prevSlide = _ => {
         if(currentSlideIndex === 0) {
             setCurrentSlideIndex(lastSlideIndex)
@@ -100,14 +99,6 @@ const CategoriesCarousel = () => {
             setVisibleCardAmt(3)
         }
     }, [totalWidth])
-
-
-
-
-
-
-
-
 
 
   return (
@@ -199,26 +190,16 @@ const Wrapper = styled.section`
 
 
 
-
-
-
-
-
-
-
-
         .categoriesCarousel__outer-container {
             position:absolute;
             color:#fff;
             width:var(--card-outer-width);
             left:50%;
-            top:0%;
-            transform:translate(-50%, -0%);
+            top:50%;
+            transform:translate(-50%, -50%);
             height:100%;
             margin-top:3rem;
-            // margin-top:-1rem;
         }
-
 
         .categoriesCarousel__heading {
             text-align:center;
@@ -228,8 +209,6 @@ const Wrapper = styled.section`
             font-weight:500;
             color:#fff;
         }
-
-
 
         .categoriesCarousel__slider-btn  {
             position:absolute;
@@ -281,15 +260,12 @@ const Wrapper = styled.section`
             transition: 0.5s ease;
         }
 
-
         .categoriesCarousel__slide {
             position:relative;
             width:var(--card-width);
             height:100%;
-
             margin:0 0.5rem;
         }
-
 
         .categoriesCarousel__slide-img {
             width:100%;
@@ -321,61 +297,104 @@ const Wrapper = styled.section`
 
 
 
+
         @media (max-width: 1435px) {
             .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.8);
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.8);
+                height:100%;
+                margin-top:-0rem;
             }
         }
 
-        @media (max-width: 1145px) {
+        @media(max-width: 1130px) {
             .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.7);
-            }
-
-            .categoriesCarousel__slides {
-                // height:var(--categoriesCarouselHeight);
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.7);
+                height:100%;
+                margin-top:0rem;
             }
         }
 
-        @media (max-width:1000px) {
-        --categoriesCarouselHeight:500px;
-
+        @media(max-width: 990px) {
+            height:500px;
 
             .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.6);
-            }
-
-        @media (max-width: 870px) {
-            .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.535);
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.6);
+                height:100%;
+                margin-top:-3rem;
             }
         }
-        
 
-        @media (max-width: 768px) {
-            // --categoriesCarouselHeight:500px;
+        @media(max-width: 890px) {
+            height:500px;
+
+            .categoriesCarousel__outer-container {
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.5);
+                height:100%;
+                margin-top:-3rem;
+            }
+        }
+
+        @media(max-width: 890px) {
+            height:500px;
             --card-amt-shown:2;
 
             .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.6);
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.6);
+                height:100%;
+                margin-top:-3rem;
             }
         }
 
-
-        @media (max-width: 600px) {
+        @media(max-width: 600px) {
+            height:500px;
             --card-amt-shown:1;
 
             .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.7);
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.6);
+                height:100%;
+                margin-top:-3rem;
             }
         }
 
-        @media (max-width: 425px) {
+        @media(max-width: 375px) {
+            height:500px;
             --card-amt-shown:1;
 
             .categoriesCarousel__outer-container {
-                transform:translate(-50%, -0%) scale(0.55);
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.5);
+                height:100%;
+                margin-top:-3rem;
             }
         }
 
+        @media(max-width: 300px) {
+            .categoriesCarousel__outer-container {
+                width:var(--card-outer-width);
+                left:50%;
+                top:50%;
+                transform:translate(-50%, -50%) scale(0.4);
+                height:100%;
+            }
+        }
 `
