@@ -5,11 +5,18 @@ import { BsChevronDoubleUp } from 'react-icons/bs'
 
 const ScrollToTop = () => {
     const [isShown, setIsShown] = React.useState(false)
-    const getScrollAmt = _ => window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop
+    const getScrollAmt = _ => (
+        window.pageYOffset ||
+        (document.documentElement 
+        || document.body.parentNode 
+        || document.body).scrollTop)
+
+    // the amount is in pixels
+    const amtToShowScrollWidget = 500
 
     React.useEffect(() => {
         const showOnScroll = _ => {
-            if(getScrollAmt() > 500) {
+            if(getScrollAmt() > amtToShowScrollWidget) {
                 setIsShown(true)
             } else {
                 setIsShown(false)
@@ -23,7 +30,7 @@ const ScrollToTop = () => {
  
     if(isShown) {
         return (
-                <ScrollWrapper href='#navbar'>
+                <ScrollWrapper onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <BsChevronDoubleUp />
                 </ScrollWrapper>
           )
