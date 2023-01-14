@@ -322,7 +322,7 @@ const Wrapper = styled.section`
 
         @media(max-width: 990px) {
             height:500px;
-
+            
             .categoriesCarousel__outer-container {
                 width:var(--card-outer-width);
                 left:50%;
@@ -331,11 +331,28 @@ const Wrapper = styled.section`
                 height:100%;
                 margin-top:-3rem;
             }
+
+            .categoriesCarousel__slider-btn  {
+                position:absolute;
+                width:50px;
+                height:50px;
+                border:none;
+                font-size:1.5rem;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                border-radius:100px;
+                cursor:pointer;
+                z-index:10;
+                --headingSectionHeight:50.39px;
+                top:calc(50% + (var(--headingSectionHeight) + 50px));
+                transform:translateY(-50%);
+            }
+    
         }
 
-        @media(max-width: 890px) {
-            height:500px;
 
+        @media(max-width: 890px) {
             .categoriesCarousel__outer-container {
                 width:var(--card-outer-width);
                 left:50%;
@@ -347,7 +364,6 @@ const Wrapper = styled.section`
         }
 
         @media(max-width: 890px) {
-            height:500px;
             --card-amt-shown:2;
 
             .categoriesCarousel__outer-container {
@@ -361,7 +377,6 @@ const Wrapper = styled.section`
         }
 
         @media(max-width: 600px) {
-            height:500px;
             --card-amt-shown:1;
 
             .categoriesCarousel__outer-container {
@@ -375,7 +390,6 @@ const Wrapper = styled.section`
         }
 
         @media(max-width: 375px) {
-            height:500px;
             --card-amt-shown:1;
 
             .categoriesCarousel__outer-container {
