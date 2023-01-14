@@ -117,7 +117,7 @@ const FeaturedCarousel = () => {
 export default FeaturedCarousel
 
 const Wrapper = styled.section`
-        margin:4rem 0 3rem;
+        margin:4rem 3rem;
 
         --featuredCarouselHeight:600px;
         --card-width:300px;
@@ -152,7 +152,6 @@ const Wrapper = styled.section`
             font-weight:500;
             color:#000;
         }
-
 
 
         .featuredCarousel__slider-btn {
@@ -206,8 +205,6 @@ const Wrapper = styled.section`
             height:100%;
         }
 
-
-
         
         .featuredCarousel__slides {
             position:absolute;
@@ -236,6 +233,8 @@ const Wrapper = styled.section`
         }
 
         @media (max-width: 1435px) {
+            margin:0rem 0 0rem;
+
             .featuredCarousel__outer-container {
                 transform:translate(-50%, -0%) scale(0.8);
             }
