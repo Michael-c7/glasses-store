@@ -4,6 +4,9 @@
 
 https://user-images.githubusercontent.com/58267348/212478105-349b6341-f3cb-4b7f-a2c8-b9038e800c20.mp4
 
+https://user-images.githubusercontent.com/58267348/212478892-0fb2abfe-92aa-452b-a56f-1ce824c1c808.mp4
+
+
 
 ### Products page
 
@@ -13,6 +16,8 @@ https://user-images.githubusercontent.com/58267348/212478154-d6b7f0f3-0cfb-43bd-
 ### Single product page
 
 https://user-images.githubusercontent.com/58267348/212478261-22107eea-321c-40fe-aeee-5bc79d7367dd.mp4
+
+https://user-images.githubusercontent.com/58267348/212478899-ef086f57-d1a1-43c9-8828-d4192762561e.mp4
 
 
 ### Cart page
