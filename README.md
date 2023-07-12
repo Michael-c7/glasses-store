@@ -9,7 +9,7 @@ Clarity and Style Unveiled: Find Your Perfect Frames at our Glasses Emporium!
 
 **Tech used:** React, Styled Components
 
-## Optimizations
+## Optimizations:
 
 I would have added skeleton loaders for a better UX experience, I would also have added authnetication login / logout system, a wishlist feature, a review feature, a purchase history page and more optimization techniques like lazy loading.
 
@@ -17,7 +17,7 @@ I would have added skeleton loaders for a better UX experience, I would also hav
 
 I learned how to build a mutil-page website that connect to an API and how to create a system of complex filtering and sorting.
 
-## Pages in Depth
+## Pages in Depth:
 
 ### Home page
 https://user-images.githubusercontent.com/58267348/212478892-0fb2abfe-92aa-452b-a56f-1ce824c1c808.mp4
@@ -35,4 +35,10 @@ https://user-images.githubusercontent.com/58267348/212478899-ef086f57-d1a1-43c9-
 https://user-images.githubusercontent.com/58267348/212478284-2c516fc5-3ff3-4347-8177-90b78d74f536.mp4
 
 ### Checkout page
+
 https://user-images.githubusercontent.com/58267348/212478316-4f550bc1-74aa-48b6-bfe1-32bba8a848e5.mp4
+
+
+## Serverless Function that gets the data:
+<a href="https://github.com/Michael-c7/glasses-serverless-function" target="_blank">Glasses serverless function</a>
+
